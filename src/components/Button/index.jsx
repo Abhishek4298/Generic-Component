@@ -1,6 +1,6 @@
 // Button.jsx
 import React from "react";
-import useIcon from "../../hooks/useIcon"; // Import the useIcon hook
+import useIcon from "../../hooks/useIcon";
 
 const Button = ({
   children,
@@ -13,7 +13,7 @@ const Button = ({
   size,
   ...props
 }) => {
-  const { iconElement } = useIcon(icon, iconPosition); // Use the custom hook
+  const { iconElement } = useIcon(icon, iconPosition);
   const handleClick = (event) => {
     if (onClick && typeof onClick === "function") {
       onClick(event);
@@ -22,12 +22,13 @@ const Button = ({
 
   const baseClasses =
     "inline-flex items-center justify-center px-4 py-2 font-semibold focus:outline-none";
+
   const colorClasses = color
-    ? `text-white bg-${color}-500 hover:bg-${color}-600`
+    ? `text-black bg-${color}-500 hover:bg-${color}-600`
     : "text-white bg-blue-500 hover:bg-blue-600";
   const borderClasses = borderColor ? `border border-${borderColor}-500` : "";
   const roundedClasses = rounded ? `rounded-${rounded}` : "rounded";
-  const sizeClass = `text-${size}`;
+  const sizeClass = size ? `text-${size}` : "text-md";
   const classes = `${baseClasses} ${colorClasses} ${borderClasses} ${roundedClasses} ${sizeClass}`;
 
   return (
