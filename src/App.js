@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./components/Button";
+import SideNav from "./components/SideNav";
 
 const App = () => {
   const handleClick = () => {
@@ -49,6 +50,9 @@ const App = () => {
         >
           Button with Icon
         </Button>
+      </div>
+      <div>
+        <SideNav />
       </div>
     </div>
   );
