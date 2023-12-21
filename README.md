@@ -6,8 +6,6 @@ Generic component that can be useful to any react project. Creating component fo
 
 ## Installation
 
-Provide step-by-step instructions on how to install and set up the project. Include any dependencies that need to be installed.
-
 # Clone the repository
 git clone https://github.com/Abhishek4298/Generic-Component.git
 
