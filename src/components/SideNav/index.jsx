@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import SideNavChildren from "./SideNavChildren";
+import { sideNavIcon } from "../../constant";
+import backIcon from "../../assets/images/previous.png";
 
 const SideNav = () => {
   const [isNavOpen, setNavOpen] = useState(false);
@@ -9,7 +12,7 @@ const SideNav = () => {
   };
 
   return (
-    <div className="flex">
+    <nav className="flex">
       <div
         className={`fixed inset-0 bg-black opacity-50 z-20 transition-opacity duration-300 ${
           isNavOpen ? "block" : "hidden"
@@ -21,46 +24,33 @@ const SideNav = () => {
         <nav>
           <ul className="space-y-4 mt-24">
             <li>
-              <a
-                href="/button"
+              <Link
+                to="/button"
                 className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
               >
-                <svg
-                 className="w-6 h-6 mr-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </svg>
                 Button
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/modal"
+              <Link
+                to="/modal"
                 className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
               >
-                <svg
+                {/* <svg
                   className="w-6 h-6 mr-2"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                >
-                </svg>
+                ></svg> */}
                 Modal
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/card"
+                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
+              >
+                Card
+              </Link>
             </li>
           </ul>
         </nav>
@@ -73,19 +63,15 @@ const SideNav = () => {
           // className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           {isNavOpen ? (
-            <h2 className="z-5 text-white">👈</h2>
+            <h2 className="z-5 text-white">
+              {<img src={backIcon} height={35} width={35} alt="back button" />}
+            </h2>
           ) : (
-            <div>
-              <svg viewBox="0 0 100 80" width="40" height="40">
-                <rect width="100" height="20"></rect>
-                <rect y="30" width="100" height="20"></rect>
-                <rect y="60" width="100" height="20"></rect>
-              </svg>
-            </div>
+            <div>{sideNavIcon}</div>
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
