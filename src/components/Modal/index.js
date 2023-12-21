@@ -4,6 +4,7 @@ const Modal = ({
   color = "blue",
   header = "Modal Header",
   content = "Modal Body",
+  position 
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -14,6 +15,8 @@ const Modal = ({
   const closeDialog = () => {
     setIsModalOpen(false);
   };
+
+  const align = position === "center" ? "mt-60" : "mt-0" 
 
   return (
     <>
@@ -27,14 +30,14 @@ const Modal = ({
       )}
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center">
+        <div className={align}>
           <div className={`bg-white rounded shadow-lg p-6 max-w-sm mx-auto`}>
             <h1 className="text-2xl font-bold mb-4">{header}</h1>
             <div>
               <h2>{content}</h2>
             </div>
             <button
-              className={`bg-${color}-500 hover:bg-${color}-600 text-white font-semibold py-2 px-4 rounded`}
+              className={`mt-3 bg-${color}-500 hover:bg-${color}-600 text-white font-semibold py-2 px-4 rounded`}
               onClick={closeDialog}
             >
               Close Dialog
