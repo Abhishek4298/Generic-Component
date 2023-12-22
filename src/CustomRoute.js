@@ -3,6 +3,7 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import InputFormControllers from "./components/FormInput"
 
 const CustomRoute = () => {
   const handleClick = () => {
@@ -85,6 +86,27 @@ const CustomRoute = () => {
             </div>
           }
         />
+           <Route
+            path="/input"
+            element={
+              <div>
+                <InputFormControllers
+                  className="p-3 ml-3 text-lg"
+                  label="Your Name"
+                  name="username"
+                  type="text"
+                  placeholder="Enter Your Name"
+                />
+                <InputFormControllers
+                  className="p-3 ml-3 text-lg text-red-800"
+                  label="Your Age"
+                  name="age"
+                  type="number"
+                  placeholder="Enter Your Age"
+                />
+              </div>
+            }
+          />
       </Routes>
     </>
   );
