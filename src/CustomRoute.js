@@ -86,11 +86,23 @@ const CustomRoute = () => {
             </div>
           }
         />
-         <Route
+        <Route
           path="/toggle"
           element={
             <div className="flex justify-center">
-              <ToggleSwitch />
+              <ToggleSwitch
+                className="mt-2 ml-4"
+                switchContainerClassName="custom-switch-container-style"
+                containerColorDark="white"
+                containerColorLight="gray"
+                buttonColor="whitesmoke"
+                labelSize="3rem"
+                buttonSize="2rem"
+                darkIcon="🌚"
+                lightIcon="🌞"
+                darkIconSize="2rem"
+                lightIconSize="2rem"
+              />
             </div>
           }
         />
