@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import ProgressBar from "./components/ProgressBar";
 import { sampleImage1, trueIcon } from "./constant";
 
 const CustomRoute = () => {
@@ -11,6 +12,14 @@ const CustomRoute = () => {
 
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
+  };
+
+  const handleComplete = () => {
+    console.log('Progress Complete');
+  };
+
+  const handleCompleteAnimation = () => {
+    console.log('Animation Complete');
   };
 
   return (
@@ -81,6 +90,21 @@ const CustomRoute = () => {
                 title="Example Card"
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/progressbar"
+          element={
+            <div className="flex justify-center items-center h-screen">
+              <ProgressBar
+                duration={2000}
+                onComplete={handleComplete}
+                onCompleteAnimation={handleCompleteAnimation}
+                barColor="green-500"
+                bgColor="gray-300"
+                height="20px"
               />
             </div>
           }
