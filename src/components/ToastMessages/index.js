@@ -5,8 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 const ToastMessages = ({
   type,
   buttonColor,
-  position,
+  buttonPosition,
   autoClose,
+  position,
   hideProgressBar,
   closeOnClick,
   pauseOnHover,
@@ -93,8 +94,8 @@ const ToastMessages = ({
   }, [autoClose]);
 
   return (
-    <div>
-      <button className={`bg-${buttonColor}-500 mr-3 p-3 rounded-lg`} onClick={showToast}>
+    <div className={`flex justify-${buttonPosition || "center"}`}>
+      <button className={`${buttonColor} mr-3 p-3 rounded-lg`} onClick={showToast}>
         Show {type} Toast
       </button>
     </div>

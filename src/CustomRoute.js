@@ -89,10 +89,11 @@ const CustomRoute = () => {
         <Route
           path="/toast"
           element={
-            <div className="flex ml-24">
+            <div>
               <ToastMessages
                 type="success"
-                buttonColor="green"
+                buttonColor="bg-green-500"
+                buttonPosition="center"
                 autoClose={5000}
                 position="top-right"
                 hideProgressBar={false}
@@ -112,7 +113,8 @@ const CustomRoute = () => {
 
               <ToastMessages
                 type="error"
-                buttonColor="red"
+                buttonColor="bg-red-500"
+                buttonPosition="end"
                 autoClose={5000}
                 position="top-right"
                 hideProgressBar={false}
@@ -131,7 +133,8 @@ const CustomRoute = () => {
               />
               <ToastMessages
                 type="info"
-                buttonColor="blue"
+                buttonColor="bg-blue-500"
+                buttonPosition="start"
                 autoClose={5000}
                 position="top-right"
                 hideProgressBar={false}
@@ -150,7 +153,8 @@ const CustomRoute = () => {
               />
               <ToastMessages
                 type="warning"
-                buttonColor="yellow"
+                buttonColor="bg-yellow-500"
+                buttonPosition="center"
                 autoClose={5000}
                 position="top-right"
                 hideProgressBar={false}
