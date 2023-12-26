@@ -86,27 +86,47 @@ const CustomRoute = () => {
             </div>
           }
         />
-           <Route
-            path="/input"
-            element={
-              <div>
-                <InputFormControllers
-                  className="p-3 ml-3 text-lg"
-                  label="Your Name"
-                  name="username"
-                  type="text"
-                  placeholder="Enter Your Name"
-                />
-                <InputFormControllers
-                  className="p-3 ml-3 text-lg text-red-800"
-                  label="Your Age"
-                  name="age"
-                  type="number"
-                  placeholder="Enter Your Age"
-                />
-              </div>
-            }
-          />
+        <Route
+          path="/input"
+          element={
+            <div>
+              <InputFormControllers
+                className="p-3 ml-3 text-lg"
+                label="Your Name"
+                name="username"
+                type="text"
+                placeholder="Enter Your Name"
+                minLength={3}
+                maxLength={20}
+              />
+              <InputFormControllers
+                className="p-3 ml-3 mx-auto text-lg"
+                label="Your Age"
+                name="age"
+                type="number"
+                placeholder="Enter Your Age"
+              />
+              <InputFormControllers
+                className="p-3 ml-3 text-lg"
+                label="Your Email"
+                name="email"
+                type="email"
+                placeholder="Enter Your Email"
+                minLength={3}
+                maxLength={50}
+              />
+              <InputFormControllers
+                className="p-3 ml-3 text-lg"
+                label="Your Password"
+                name="password"
+                type="password"
+                placeholder="Enter Your Password"
+                minLength={8}
+                maxLength={12}
+              />
+            </div>
+          }
+        />
       </Routes>
     </>
   );
