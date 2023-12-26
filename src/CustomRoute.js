@@ -3,6 +3,7 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import ToggleSwitch from "./components/Toggle";
 
 const CustomRoute = () => {
   const handleClick = () => {
@@ -81,6 +82,26 @@ const CustomRoute = () => {
                 title="Example Card"
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/toggle"
+          element={
+            <div className="flex justify-center">
+              <ToggleSwitch
+                className="mt-2 ml-4"
+                switchContainerClassName="custom-switch-container-style"
+                containerColorDark="white"
+                containerColorLight="gray"
+                buttonColor="whitesmoke"
+                labelSize="3rem"
+                buttonSize="2rem"
+                darkIcon="🌚"
+                lightIcon="🌞"
+                darkIconSize="2rem"
+                lightIconSize="2rem"
               />
             </div>
           }

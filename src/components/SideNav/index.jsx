@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import SideNavChildren from "./SideNavChildren";
 import { sideNavIcon } from "../../constant";
 import backIcon from "../../assets/images/previous.png";
+import { useTheme } from "../../ThemeContext";
 
 const SideNav = () => {
   const [isNavOpen, setNavOpen] = useState(false);
+
+  const {theme} =useTheme();
 
   const toggleNav = () => {
     setNavOpen(!isNavOpen);
@@ -52,6 +55,14 @@ const SideNav = () => {
                 Card
               </Link>
             </li>
+            <li>
+              <Link
+                to="/toggle"
+                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
+              >
+                Toggle Switch
+              </Link>
+            </li>
           </ul>
         </nav>
       </SideNavChildren>
@@ -67,7 +78,7 @@ const SideNav = () => {
               {<img src={backIcon} height={35} width={35} alt="back button" />}
             </h2>
           ) : (
-            <div>{sideNavIcon}</div>
+            <div className={`bg-${theme === "light" ? "" : "white"}`}>{sideNavIcon}</div>
           )}
         </div>
       </div>
