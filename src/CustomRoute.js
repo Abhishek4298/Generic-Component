@@ -3,6 +3,7 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import ToastMessages from "./components/ToastMessages";
 
 const CustomRoute = () => {
   const handleClick = () => {
@@ -81,6 +82,90 @@ const CustomRoute = () => {
                 title="Example Card"
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/toast"
+          element={
+            <div className="flex ml-24">
+              <ToastMessages
+                type="success"
+                buttonColor="green"
+                autoClose={5000}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                progress={0.3}
+                theme="dark"
+                promiseFn={async () => {
+                  await new Promise((resolve) => setTimeout(resolve, 2000));
+                }}
+                loadingMessage="Loading..."
+                successMessage="Success Toast!"
+                errorMessage="Error!"
+                delaySuccess="1000"
+              />
+
+              <ToastMessages
+                type="error"
+                buttonColor="red"
+                autoClose={5000}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                progress={0.3}
+                theme="light"
+                promiseFn={async () => {
+                  await new Promise((resolve) => setTimeout(resolve, 2000));
+                }}
+                loadingMessage="Loading..."
+                successMessage="Error Toast!"
+                errorMessage="Error!"
+                delaySuccess="1000"
+              />
+              <ToastMessages
+                type="info"
+                buttonColor="blue"
+                autoClose={5000}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                progress={0.3}
+                theme="dark"
+                promiseFn={async () => {
+                  await new Promise((resolve) => setTimeout(resolve, 2000));
+                }}
+                loadingMessage="Loading..."
+                successMessage="Information Toast!"
+                errorMessage="Error!"
+                delaySuccess="1000"
+              />
+              <ToastMessages
+                type="warning"
+                buttonColor="yellow"
+                autoClose={5000}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                progress={0.3}
+                theme="dark"
+                promiseFn={async () => {
+                  await new Promise((resolve) => setTimeout(resolve, 2000));
+                }}
+                loadingMessage="Loading..."
+                successMessage="Warning Toast!"
+                errorMessage="Error!"
+                delaySuccess="1000"
               />
             </div>
           }
