@@ -3,8 +3,14 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import GenericTable from "./components/table";
+import Data from "./components/table/data.json";
+import COLUMNS from "./components/table/COLUMNS";
+import { useMemo } from "react";
 
 const CustomRoute = () => {
+  const columns = useMemo(() => COLUMNS, []);
+  const data = useMemo(() => Data, []);
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -84,6 +90,21 @@ const CustomRoute = () => {
               />
             </div>
           }
+        />
+        <Route path="/table"
+        element={
+          <GenericTable
+        columns={columns}
+        data={data}
+        showPagination={true}
+        showExpanding={false}
+        showColumnSizing={true}
+        showRowSelection={true}
+        showFilters={true}
+        showSorting={true}
+        defaultPageSize={10}
+      />
+        }
         />
       </Routes>
     </>
