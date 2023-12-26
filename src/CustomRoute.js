@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
@@ -14,13 +15,10 @@ const CustomRoute = () => {
     alert(`Button clicked with data: ${data}`);
   };
 
-  const handleComplete = () => {
-    console.log('Progress Complete');
-  };
-
-  const handleCompleteAnimation = () => {
-    console.log('Animation Complete');
-  };
+  const [progress, setProgress] = useState(0);
+  setTimeout(() => {
+    setProgress(50);
+  }, 2000);
 
   return (
     <>
@@ -97,15 +95,8 @@ const CustomRoute = () => {
         <Route
           path="/progressbar"
           element={
-            <div className="flex justify-center items-center h-screen">
-              <ProgressBar
-                duration={2000}
-                onComplete={handleComplete}
-                onCompleteAnimation={handleCompleteAnimation}
-                barColor="green-500"
-                bgColor="gray-300"
-                height="20px"
-              />
+            <div className="flex justify-between items-center h-screen ml-[30%]">
+              <ProgressBar progress={progress} />
             </div>
           }
         />
