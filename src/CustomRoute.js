@@ -91,20 +91,20 @@ const CustomRoute = () => {
             </div>
           }
         />
-        <Route path="/table"
-        element={
-          <GenericTable
-        columns={columns}
-        data={data}
-        showPagination={true}
-        showExpanding={false}
-        showColumnSizing={true}
-        showRowSelection={true}
-        showFilters={true}
-        showSorting={true}
-        defaultPageSize={10}
-      />
-        }
+        <Route
+          path="/table"
+          element={
+            <GenericTable
+              columns={columns}
+              data={data}
+              showPagination={true}
+              showColumnSizing={true}
+              showRowSelection={true}
+              showFilters={true}
+              showSorting={true}
+              defaultPageSize={20}
+            />
+          }
         />
       </Routes>
     </>

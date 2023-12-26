@@ -1,44 +1,168 @@
-import React from 'react';
-import { useTable } from 'react-table';
+import React from "react";
+import {
+  useTable,
+  useGlobalFilter,
+  useSortBy,
+  useRowSelect,
+  usePagination,
+} from "react-table";
+import GlobalFilter from "./GlobalFilter";
+import { Checkbox } from "./Checkbox";
 
-const GenericTable = ({ columns, data }) => {
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+const GenericTable = ({
+  columns,
+  data,
+  showPagination,
+  showColumnSizing,
+  showRowSelection,
+  showFilters,
+  showSorting,
+  defaultPageSize,
+}) => {
+  const tableInstance = useTable(
+    {
+      columns: columns,
+      data: data,
+    },
+    useGlobalFilter,
+    showSorting && useSortBy,
+    showPagination && usePagination,
+    showRowSelection && useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((visibleColumns) => {
+        if (showRowSelection) {
+          return [
+            {
+              id: "selection",
+              Header: ({ getToggleAllRowsSelectedProps }) => (
+                <Checkbox {...getToggleAllRowsSelectedProps()} />
+              ),
+              Cell: ({ row }) => (
+                <Checkbox {...row.getToggleRowSelectedProps()} />
+              ),
+            },
+            ...visibleColumns,
+          ];
+        }
+        return visibleColumns;
+      });
+    }
+  );
+
+  console.log(tableInstance);
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    previousPage,
+    nextPage,
+    canPreviousPage,
+    canNextPage,
+    selectedFlatRows,
+    state,
+    setGlobalFilter,
+  } = tableInstance;
+
+  const { globalFilter } = state;
 
   return (
-    <table {...getTableProps()} style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: '2px solid #ddd',
-                  padding: '10px',
-                  textAlign: 'left',
-                }}
+    <div className="pt-5 m-2">
+      {showFilters && (
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+      )}
+      <div className="overflow-x-auto overflow-y-auto h-[32rem]">
+        <table
+          {...getTableProps}
+          className="min-w-full bg-white rounded-lg shadow-md"
+        >
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr
+                {...headerGroup.getHeaderGroupProps()}
+                className="border-b bg-gray-100"
               >
-                {column.render('Header')}
-              </th>
+                {headerGroup.headers.map((column, columnIndex) => (
+                  <th
+                    {...column.getHeaderProps(
+                      columnIndex === 0 ? {} : column.getSortByToggleProps()
+                    )}
+                    className="px-6 py-6 text-left text-md font-bold text-white uppercase bg-slate-800 border-2 border-white"
+                  >
+                    {column.render("Header")}
+                    {columnIndex !== 0 && (
+                      <span className="px-2">
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? "🔽"
+                            : "🔼"
+                          : "↕️"}
+                      </span>
+                    )}
+                  </th>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()} style={{ borderBottom: '1px solid #ddd' }}>
-              {row.cells.map((cell) => (
-                <td {...cell.getCellProps()} style={{ padding: '10px' }}>
-                  {cell.render('Cell')}
-                </td>
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          </thead>
+          <tbody {...getTableBodyProps}>
+            {page.map((row, rowIndex) => {
+              tableInstance.prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  // className={rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}
+                  className={`${
+                    row.isSelected
+                      ? "bg-orange-200"
+                      : "bg-white-100, cursor-pointer"
+                  }`}
+                  onClick={() => row.toggleRowSelected()}
+                >
+                  {row.cells.map((cell) => (
+                    <td
+                      {...cell.getCellProps()}
+                      className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                    >
+                      {cell.render("Cell")}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {showPagination && (
+        <div className="flex items-center justify-center mt-3">
+          <button
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+            className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded"
+          >
+            ⏮️
+          </button>
+          <button
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+            className="bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded"
+          >
+            ⏭️
+          </button>
+        </div>
+      )}
+      {showRowSelection && (
+        <pre>
+          {selectedFlatRows.length > 0
+            ? JSON.stringify(
+                selectedFlatRows.map((row) => row.original),
+                null,
+                2
+              )
+            : null}
+        </pre>
+      )}
+    </div>
   );
 };
 
