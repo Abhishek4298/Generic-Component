@@ -92,6 +92,8 @@ const CustomRoute = () => {
             <div>
               <InputFormControllers
                 className="p-3 ml-3 text-lg"
+                boxPosition='justify-center'
+                labelColor='text-green-500'
                 label="Your Name"
                 name="username"
                 type="text"
@@ -101,6 +103,7 @@ const CustomRoute = () => {
               />
               <InputFormControllers
                 className="p-3 ml-3 mx-auto text-lg"
+                boxPosition='justify-center'
                 label="Your Age"
                 name="age"
                 type="number"
@@ -108,6 +111,7 @@ const CustomRoute = () => {
               />
               <InputFormControllers
                 className="p-3 ml-3 text-lg"
+                boxPosition='justify-center'
                 label="Your Email"
                 name="email"
                 type="email"
@@ -117,6 +121,7 @@ const CustomRoute = () => {
               />
               <InputFormControllers
                 className="p-3 ml-3 text-lg"
+                boxPosition='justify-center'
                 label="Your Password"
                 name="password"
                 type="password"

@@ -9,6 +9,8 @@ const InputFormControllers = ({
   className,
   minLength,
   maxLength,
+  boxPosition,
+  labelColor,
   ...rest
 }) => {
   const formik = useFormik({
@@ -63,8 +65,8 @@ const InputFormControllers = ({
     },
   });
   
-  const containerClasses = `mb-4 mt-12 ${className}`;
-  const labelClasses = "block text-gray-700 text-sm font-bold mb-2";
+  const containerClasses = `flex mb-4 mt-10 ${className} ${boxPosition}`;
+  const labelClasses = `text-gray-700 mt-2 text-sm font-bold mr-3 ${labelColor}`;
   const inputClasses = `${
     formik.touched[name] && formik.errors[name]
       ? "border-red-500"
@@ -76,24 +78,28 @@ const InputFormControllers = ({
   } rounded-md py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200`;
 
   return (
-    <div className={containerClasses}>
-      <label htmlFor={name} className={labelClasses}>
-        {label}
-      </label>
-      <input
-        type={type}
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        onChange={formik.handleChange}
-        onBlur={() => formik.setFieldTouched(name, true)}
-        value={formik.values[name]}
-        className={inputClasses}
-        {...rest}
-      />
-      {formik.touched[name] && formik.errors[name] && (
-        <div className="text-red-500 text-xs mt-1">{formik.errors[name]}</div>
-      )}
+    <div>
+      <div className={containerClasses}>
+        <label htmlFor={name} className={labelClasses}>
+          {label}
+        </label>
+        <input
+          type={type}
+          id={name}
+          name={name}
+          placeholder={placeholder}
+          onChange={formik.handleChange}
+          onBlur={() => formik.setFieldTouched(name, true)}
+          value={formik.values[name]}
+          className={inputClasses}
+          {...rest}
+        />
+      </div>
+      <div className={`flex ${boxPosition}`}>
+        {formik.touched[name] && formik.errors[name] && (
+          <div className="text-red-500 text-xs mt-1">{formik.errors[name]}</div>
+        )}
+      </div>
     </div>
   );
 };
