@@ -122,7 +122,7 @@ const CustomRoute = () => {
               itemsPosition="center"
               ttitleColor="text-white"
               contentBgColor="bg-white"
-              contentColor="text-purple-800"
+              contentColor="text-orange-700"
               headerSize="text-3xl"
               contentSize="text-2xl"
             />

@@ -22,7 +22,7 @@ const AccordionItem = ({
         className={`flex items-${itemsPosition} justify-between p-2 cursor-pointer ${headerBgColor}`}
         onClick={() => onToggle(index)}
       >
-        <div className={`${titleColor} ${headerSize}`}>{title}</div>
+        <div className={`${titleColor} ${headerSize} font-bold`}>{title}</div>
         {isOpen ? (
           <ChevronUpIcon className="w-6 h-6 text-white" />
         ) : (
@@ -31,10 +31,11 @@ const AccordionItem = ({
       </div>
       {isOpen && (
         <div className={`accordion-content p-2 ${contentBgColor}`}>
-          {imageUrl && (
+          {imageUrl ? (
             <img src={imageUrl} alt={title} className="mb-2 rounded" />
-          )}
-          <p className={`${contentColor} ${contentSize}`}>{content}</p>
+          ) : (<h1 className={`${headerSize} text-${itemsPosition} p-3 text-blue-700 font-bold`}>Loading...</h1>)
+          }
+          <p className={`${contentColor} ${contentSize} text-justify`}>{content}</p>
         </div>
       )}
     </div>
