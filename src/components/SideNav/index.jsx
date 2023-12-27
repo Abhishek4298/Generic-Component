@@ -52,6 +52,14 @@ const SideNav = () => {
                 Card
               </Link>
             </li>
+            <li>
+              <Link
+                to="/datepicker"
+                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
+              >
+                Date Picker
+              </Link>
+            </li>
           </ul>
         </nav>
       </SideNavChildren>

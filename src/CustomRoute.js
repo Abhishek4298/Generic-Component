@@ -3,14 +3,29 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import { useState } from "react";
+import DatePickerComponent from "./components/DatePicker";
 
 const CustomRoute = () => {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dateRange, setDateRange] = useState([null, null]);
+
   const handleClick = () => {
     alert("Button clicked!");
   };
 
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
+  };
+
+  const handleDateChange = (date) => {
+    console.log("Selected Date:", date);
+    setSelectedDate(date);
+  };
+
+  const handleDateRangeChange = (dates) => {
+    console.log("Selected Date Range:", dates);
+    setDateRange(dates);
   };
 
   return (
@@ -83,6 +98,28 @@ const CustomRoute = () => {
                 onClick={() => alert("Button clicked!")}
               />
             </div>
+          }
+        />
+        <Route
+          path="/datepicker"
+          element={
+            <>
+              <DatePickerComponent
+                selectedDate={selectedDate}
+                onChange={handleDateChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={2}
+              />
+              <DatePickerComponent
+                startDate={dateRange[0]}
+                endDate={dateRange[1]}
+                onChange={handleDateRangeChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={3}
+              />
+            </>
           }
         />
       </Routes>
