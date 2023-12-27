@@ -3,6 +3,7 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import StarRating from "./components/Rating";
 
 const CustomRoute = () => {
   const handleClick = () => {
@@ -11,6 +12,10 @@ const CustomRoute = () => {
 
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
+  };
+
+  const handleRatingChange = (newRating) => {
+    console.log('New Rating:', newRating);
   };
 
   return (
@@ -81,6 +86,20 @@ const CustomRoute = () => {
                 title="Example Card"
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/rating"
+          element={
+            <div className="flex justify-center items-center h-screen">
+              <StarRating
+                color='text-yellow-500'
+                size='text-4xl'
+                totalStars={5}
+                initialRating={3}
+                onChange={handleRatingChange}
               />
             </div>
           }
