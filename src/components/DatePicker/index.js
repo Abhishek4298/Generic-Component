@@ -9,7 +9,8 @@ const DatePickerComponent = ({
   endDate,
   closeOnSelect,
   isClear,
-  monthShown
+  monthShown,
+  dateBorder
 }) => {
   const [dateSelected, setSelectedDate] = useState(selectedDate);
   const [dateRange, setDateRange] = useState([startDate, endDate]);
@@ -35,7 +36,7 @@ const DatePickerComponent = ({
           shouldCloseOnSelect={closeOnSelect}
           isClearable={isClear}
           monthsShown={monthShown}
-          className="w-full p-2 border border-gray-300 rounded-md cursor-pointer"
+          className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
       </div>
       <div className="flex space-x-2">
@@ -51,7 +52,7 @@ const DatePickerComponent = ({
           shouldCloseOnSelect={closeOnSelect}
           isClearable={isClear}
           monthsShown={monthShown}
-          className="w-full p-2 border border-gray-300 rounded-md cursor-pointer"
+          className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
         <DatePicker
           selected={dateRange[1]}
@@ -64,7 +65,7 @@ const DatePickerComponent = ({
           shouldCloseOnSelect={closeOnSelect}
           isClearable={isClear}
           monthsShown={monthShown}
-          className="w-full p-2 border border-gray-300 rounded-md cursor-pointer"
+          className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
       </div>
     </>

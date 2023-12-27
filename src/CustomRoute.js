@@ -110,6 +110,7 @@ const CustomRoute = () => {
                 closeOnSelect={true}
                 isClear={true}
                 monthShown={2}
+                dateBorder="border border-gray-300"
               />
               <DatePickerComponent
                 startDate={dateRange[0]}
@@ -118,6 +119,7 @@ const CustomRoute = () => {
                 closeOnSelect={true}
                 isClear={true}
                 monthShown={3}
+                dateBorder="border border-red-300"
               />
             </>
           }
