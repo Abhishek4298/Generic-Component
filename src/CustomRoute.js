@@ -98,7 +98,7 @@ const CustomRoute = () => {
           }
         />
         <Route
-          path="/menu"
+          path="/menu/*"
           element={
             <div>
               <MenuBar
@@ -109,16 +109,17 @@ const CustomRoute = () => {
                 font="font-serif"
                 height="h-25"
                 image="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+                basePath="/menu"
               />
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/music" element={<Music />} />
-                <Route path="/contact" element={<Contact />} />
-              {/* {menuItems.map((menu) => (
-                <Route key={menu.link} path={menu.link} element={<menu.linkedComponent />} />
-              ))} */}
-            </Routes>
+                {menuItems.map((menu) => (
+                  <Route
+                    key={menu.link}
+                    path={menu.link}
+                    element={<menu.linkedComponent />}
+                  />
+                ))}
+              </Routes>
             </div>
           }
         />

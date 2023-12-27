@@ -8,7 +8,8 @@ const MenuBar = ({
   textSize,
   font,
   height,
-  image
+  image,
+  basePath
 }) => {
   const menuBarStyle = {
     backgroundColor: backgroundColor || "bg-gray-800",
@@ -30,7 +31,7 @@ const MenuBar = ({
           {items.map((item, index) => (
             <li key={index}>
               <Link
-                to={item.link}
+                to={`${basePath}${item.link}`}
                 className={`${menuBarStyle.color} hover:text-gray-300`}
               >
                 {item.label}
