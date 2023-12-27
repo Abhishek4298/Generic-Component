@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import ProgressBar from "./components/ProgressBar";
 import { sampleImage1, trueIcon } from "./constant";
 
 const CustomRoute = () => {
@@ -12,6 +14,11 @@ const CustomRoute = () => {
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
   };
+
+  const [progress, setProgress] = useState(0);
+  setTimeout(() => {
+    setProgress(50);
+  }, 2000);
 
   return (
     <>
@@ -82,6 +89,14 @@ const CustomRoute = () => {
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
               />
+            </div>
+          }
+        />
+        <Route
+          path="/progressbar"
+          element={
+            <div className="flex justify-between items-center h-screen ml-[30%]">
+              <ProgressBar progress={progress} />
             </div>
           }
         />
