@@ -23,6 +23,9 @@ const GenericTable = ({
     {
       columns: columns,
       data: data,
+      initialState: {
+        pageSize: defaultPageSize,
+      },
     },
     useGlobalFilter,
     showSorting && useSortBy,
