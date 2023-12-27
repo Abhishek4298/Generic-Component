@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "./styles.css";
 
-const ProgressBar = ({ progress }) => {
+const ProgressBar = ({ progress, barColor, barHeight}) => {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    const updateInterval = 20; 
+    const updateInterval = 20;
 
     const update = () => {
       setWidth((prevWidth) =>
@@ -24,8 +23,11 @@ const ProgressBar = ({ progress }) => {
   }, [progress, width]);
 
   return (
-    <div className="progress-container">
-      <div className="progress-bar" style={{ width: `${width}%` }}>
+    <div className={`relative  w-full  ${barHeight} bg-gray-300 rounded overflow-hidden`}>
+      <div
+        className={`${barHeight} ${barColor} text-white text-center leading-8 transition-all duration-200`}
+        style={{ width: `${width}%`}}
+      >
         {width}%
       </div>
     </div>
@@ -37,3 +39,4 @@ ProgressBar.propTypes = {
 };
 
 export default ProgressBar;
+

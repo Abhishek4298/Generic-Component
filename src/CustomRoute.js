@@ -95,8 +95,12 @@ const CustomRoute = () => {
         <Route
           path="/progressbar"
           element={
-            <div className="flex justify-between items-center h-screen ml-[30%]">
-              <ProgressBar progress={progress} />
+            <div className="flex justify-between items-center h-screen">
+              <ProgressBar 
+              progress={progress} 
+              barColor='bg-green-500'
+              barHeight='h-10'
+              />
             </div>
           }
         />
