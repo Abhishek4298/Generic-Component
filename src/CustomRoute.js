@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import Tooltip from "./components/Tooltip";
 import { sampleImage1, trueIcon } from "./constant";
 
 const CustomRoute = () => {
@@ -82,6 +83,37 @@ const CustomRoute = () => {
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
               />
+            </div>
+          }
+        />
+       
+        <Route
+          path="/tooltip"
+          element={
+            <div className="flex justify-center items-center h-screen">
+              <Tooltip text="Top Tooltip" position="top">
+                <button className="p-4 mr-3 bg-blue-500 text-white hover:bg-blue-600">
+                  Top
+                </button>
+              </Tooltip>
+
+              <Tooltip text="Right Tooltip" position="right">
+                <button className="p-4 mr-3 bg-green-500 text-white hover:bg-green-600">
+                  Right
+                </button>
+              </Tooltip>
+
+              <Tooltip text="Bottom Tooltip" position="bottom">
+                <button className="p-4 mr-3 bg-yellow-500 text-white hover:bg-yellow-600">
+                  Bottom
+                </button>
+              </Tooltip>
+
+              <Tooltip text="Left Tooltip" position="left">
+                <button className="p-4 mr-3 bg-red-500 text-white hover:bg-red-600">
+                  Left
+                </button>
+              </Tooltip>
             </div>
           }
         />
