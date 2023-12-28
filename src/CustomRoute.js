@@ -98,11 +98,10 @@ const CustomRoute = () => {
               columns={columns}
               data={data}
               showPagination={true}
-              showColumnSizing={true}
               showRowSelection={true}
               showFilters={true}
               showSorting={true}
-              defaultPageSize={20}
+              defaultPageSize={10}
             />
           }
         />

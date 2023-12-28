@@ -13,7 +13,6 @@ const GenericTable = ({
   columns,
   data,
   showPagination,
-  showColumnSizing,
   showRowSelection,
   showFilters,
   showSorting,
@@ -52,13 +51,13 @@ const GenericTable = ({
     }
   );
 
-  console.log(tableInstance);
-
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
+    prepareRow,
     previousPage,
     nextPage,
     canPreviousPage,
@@ -71,11 +70,15 @@ const GenericTable = ({
   const { globalFilter } = state;
 
   return (
-    <div className="pt-5 m-2">
+    <div className={`${showFilters ? "pt-5" : "pt-20"}  m-2`}>
       {showFilters && (
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       )}
-      <div className="overflow-x-auto overflow-y-auto h-[32rem]">
+      <div
+        className={`overflow-x-auto overflow-y-auto ${
+          showPagination === false ? "h-[90vh]" : "h-[32rem]"
+        }`}
+      >
         <table
           {...getTableProps}
           className="min-w-full bg-white rounded-lg shadow-md"
@@ -86,53 +89,235 @@ const GenericTable = ({
                 {...headerGroup.getHeaderGroupProps()}
                 className="border-b bg-gray-100"
               >
-                {headerGroup.headers.map((column, columnIndex) => (
-                  <th
-                    {...column.getHeaderProps(
-                      columnIndex === 0 ? {} : column.getSortByToggleProps()
-                    )}
-                    className="px-6 py-6 text-left text-md font-bold text-white uppercase bg-slate-800 border-2 border-white"
-                  >
-                    {column.render("Header")}
-                    {columnIndex !== 0 && (
-                      <span className="px-2">
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? "🔽"
-                            : "🔼"
-                          : "↕️"}
-                      </span>
-                    )}
-                  </th>
-                ))}
+                {showSorting
+                  ? headerGroup.headers.map((column, columnIndex) => (
+                      <th
+                        {...column.getHeaderProps(
+                          columnIndex === 0 ? {} : column.getSortByToggleProps()
+                        )}
+                        className="px-6 py-6 text-left text-md font-bold text-white uppercase bg-slate-800 border-2 border-white"
+                      >
+                        {column.render("Header")}
+                        {columnIndex !== 0 && (
+                          <span className="px-2">
+                            {column.isSorted
+                              ? column.isSortedDesc
+                                ? "🔽"
+                                : "🔼"
+                              : "↕️"}
+                          </span>
+                        )}
+                      </th>
+                    ))
+                  : headerGroup.headers.map((column) => (
+                      <th
+                        {...column.getHeaderProps()}
+                        className="px-6 py-6 text-left text-md font-bold text-white uppercase bg-slate-800 border-2 border-white"
+                      >
+                        {column.render("Header")}
+                      </th>
+                    ))}
               </tr>
             ))}
           </thead>
           <tbody {...getTableBodyProps}>
-            {page.map((row, rowIndex) => {
-              tableInstance.prepareRow(row);
-              return (
-                <tr
-                  {...row.getRowProps()}
-                  // className={rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}
-                  className={`${
-                    row.isSelected
-                      ? "bg-orange-200"
-                      : "bg-white-100, cursor-pointer"
-                  }`}
-                  onClick={() => row.toggleRowSelected()}
-                >
-                  {row.cells.map((cell) => (
-                    <td
-                      {...cell.getCellProps()}
-                      className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+            {showPagination === true && showRowSelection === true && showFilters === true && showSorting === true
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      // className={rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
                     >
-                      {cell.render("Cell")}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === true &&
+                showRowSelection === false &&
+                showFilters === false &&
+                showFilters === false
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === true &&
+                showRowSelection === true &&
+                showFilters === false &&
+                showFilters === true
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
+                    >
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === true &&
+                showRowSelection === false &&
+                showFilters === true &&
+                showFilters === true
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === false &&
+                showRowSelection === true &&
+                showFilters === true &&
+                showSorting === true
+              ? rows.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
+                    >
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === false &&
+                showRowSelection === true &&
+                showFilters === false &&
+                showSorting === (false || true)
+              ? rows.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
+                    >
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === false &&
+                showRowSelection === false &&
+                showFilters === true &&
+                showSorting === true
+              ? rows.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === false &&
+                showRowSelection === false &&
+                showFilters === false &&
+                (showSorting === true || showSorting === false)
+              ? rows.map((row, rowIndex) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps}
+                          style={{ border: "1px solid black", padding: "8px" }}
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : rows.map((row, rowIndex) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps}
+                          style={{ border: "1px solid black", padding: "8px" }}
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
       </div>
