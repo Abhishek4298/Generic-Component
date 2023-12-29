@@ -1,16 +1,48 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import SearchInput from "./components/SearchInput";
 
 const CustomRoute = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchedResult, setSearchedResult] = useState('');
   const handleClick = () => {
     alert("Button clicked!");
   };
 
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
+  };
+
+  const searchData = ["Ranchi", "Jamshedpur", "Varanasi", "Ahmedabad"];
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchIconClick = () => {
+    console.log('Search query:', searchQuery);
+
+    if (!searchQuery.trim()) {
+      alert('Please enter a valid search query!');
+      return;
+    }
+
+    const filteredData = searchData.filter(city =>
+      city.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+    if (filteredData.length === 0) {
+        alert('Data not found in the list!');
+        setSearchedResult('');
+        return;
+      }
+
+      setSearchedResult(filteredData);
+    
   };
 
   return (
@@ -82,6 +114,20 @@ const CustomRoute = () => {
                 content="This is a generic card component."
                 onClick={() => alert("Button clicked!")}
               />
+            </div>
+          }
+        />
+         <Route
+          path="/searchinput"
+          element={
+            <div className="flex justify-center items-center h-screen">
+               <SearchInput 
+                  placeholder="Search..."
+                  onChange={handleSearchChange}
+                  searchData={searchData}
+                  onSearchIconClick={handleSearchIconClick}
+                  searchedResult={searchedResult}
+               />
             </div>
           }
         />
