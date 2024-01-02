@@ -1,5 +1,4 @@
 import React from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 
 const AccordionItem = ({
   item,
@@ -16,26 +15,64 @@ const AccordionItem = ({
 }) => {
   const { title, content, imageUrl } = item;
 
+  const headerStyle = headerBgColor
+    ? {
+        background: `linear-gradient(to right, ${headerBgColor}, ${headerBgColor})`,
+      }
+    : { background: `linear-gradient(to right, red, red)` };
+
   return (
     <div className="mb-2 border rounded overflow-hidden">
       <div
-        className={`flex items-${itemsPosition} justify-between p-2 cursor-pointer ${headerBgColor}`}
+        className={`flex items-${itemsPosition} justify-between p-2 cursor-pointer`}
+        style={headerStyle}
         onClick={() => onToggle(index)}
       >
-        <div className={`${titleColor} ${headerSize} font-bold`}>{title}</div>
+        <div className={`text-${titleColor} text-[${headerSize}px] font-bold`}>
+          {title}
+        </div>
         {isOpen ? (
-          <ChevronUpIcon className="w-6 h-6 text-white" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className={`w-6 h-6 text-${titleColor}`}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
         ) : (
-          <ChevronDownIcon className="w-6 h-6 text-white" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className={`w-6 h-6 text-${titleColor}`}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 15l7-7 7 7"
+            />
+          </svg>
         )}
       </div>
       {isOpen && (
-        <div className={`accordion-content p-2 ${contentBgColor}`}>
-          {imageUrl ? (
+        <div className={`accordion-content p-2 bg-${contentBgColor}`}>
+          {imageUrl && (
             <img src={imageUrl} alt={title} className="mb-2 rounded" />
-          ) : (<h1 className={`${headerSize} text-${itemsPosition} p-3 text-blue-700 font-bold`}>Loading...</h1>)
-          }
-          <p className={`${contentColor} ${contentSize} text-justify`}>{content}</p>
+          )}
+          <p
+            className={`text-${contentColor}-700 text-[${contentSize}px] text-justify`}
+          >
+            {content}
+          </p>
         </div>
       )}
     </div>

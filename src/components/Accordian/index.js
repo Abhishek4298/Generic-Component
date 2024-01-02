@@ -10,6 +10,7 @@ const Accordion = ({
   contentColor,
   contentSize,
   headerSize,
+  accordionWidth,
 }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -18,7 +19,7 @@ const Accordion = ({
   };
 
   return (
-    <div className="w-full md:w-1/2 lg:w-1/3 mx-auto mt-8">
+    <div className={`w-[${accordionWidth}%] mx-auto mt-8`}>
       {items.map((item, index) => (
         <AccordionItem
           key={index}
@@ -28,7 +29,7 @@ const Accordion = ({
           onToggle={handleToggle}
           headerBgColor={headerBgColor}
           itemsPosition={itemsPosition}
-          ttitleColor={ttitleColor}
+          titleColor={ttitleColor}
           contentBgColor={contentBgColor}
           contentColor={contentColor}
           contentSize={contentSize}

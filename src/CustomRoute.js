@@ -114,17 +114,18 @@ const CustomRoute = () => {
           }
         />
         <Route
-          path="/accordian"
+          path="/accordion"
           element={
             <Accordion
               items={accordionItems}
-              headerBgColor="bg-gradient-to-r from-blue-300 to-blue-400"
+              headerBgColor="blue"
               itemsPosition="center"
-              ttitleColor="text-white"
-              contentBgColor="bg-white"
-              contentColor="text-orange-700"
-              headerSize="text-3xl"
-              contentSize="text-2xl"
+              ttitleColor="white"
+              contentBgColor="white"
+              contentColor="orange"
+              headerSize="36"
+              contentSize="24"
+              accordionWidth="40"
             />
           }
         />

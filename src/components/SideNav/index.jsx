@@ -54,10 +54,10 @@ const SideNav = () => {
             </li>
             <li>
               <Link
-                to="/accordian"
+                to="/accordion"
                 className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
               >
-                Accordian
+                Accordion
               </Link>
             </li>
           </ul>
