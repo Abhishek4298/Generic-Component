@@ -3,7 +3,7 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
-import GenericTable from "./components/table";
+import Table from "./components/table";
 import Data from "./components/table/data.json";
 import COLUMNS from "./components/table/COLUMNS";
 import { useMemo } from "react";
@@ -94,7 +94,7 @@ const CustomRoute = () => {
         <Route
           path="/table"
           element={
-            <GenericTable
+            <Table
               columns={columns}
               data={data}
               showPagination={true}

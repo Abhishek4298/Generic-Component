@@ -9,7 +9,7 @@ import {
 import GlobalFilter from "./GlobalFilter";
 import { Checkbox } from "./Checkbox";
 
-const GenericTable = ({
+const Table = ({
   columns,
   data,
   showPagination,
@@ -27,9 +27,9 @@ const GenericTable = ({
       },
     },
     useGlobalFilter,
-    showSorting && useSortBy,
-    showPagination && usePagination,
-    showRowSelection && useRowSelect,
+    useSortBy,
+    usePagination,
+    useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((visibleColumns) => {
         if (showRowSelection) {
@@ -121,7 +121,10 @@ const GenericTable = ({
             ))}
           </thead>
           <tbody {...getTableBodyProps}>
-            {showPagination === true && showRowSelection === true && showFilters === true && showSorting === true
+            {showPagination === true &&
+            showRowSelection === true &&
+            showFilters === true &&
+            showSorting === true
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
@@ -149,7 +152,7 @@ const GenericTable = ({
               : showPagination === true &&
                 showRowSelection === false &&
                 showFilters === false &&
-                showFilters === false
+                showSorting === false
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
@@ -165,10 +168,37 @@ const GenericTable = ({
                     </tr>
                   );
                 })
+                : showPagination === true &&
+                showRowSelection === true &&
+                showFilters === true &&
+                showSorting === false
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
+                    >
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
               : showPagination === true &&
                 showRowSelection === true &&
                 showFilters === false &&
-                showFilters === true
+                showSorting === true
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
@@ -195,7 +225,7 @@ const GenericTable = ({
               : showPagination === true &&
                 showRowSelection === false &&
                 showFilters === true &&
-                showFilters === true
+                showSorting === true
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
@@ -354,4 +384,4 @@ const GenericTable = ({
   );
 };
 
-export default GenericTable;
+export default Table;
