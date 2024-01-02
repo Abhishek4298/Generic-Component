@@ -7,10 +7,18 @@ import Table from "./components/table";
 import Data from "./components/table/data.json";
 import COLUMNS from "./components/table/COLUMNS";
 import { useMemo } from "react";
+import ColumnFilter from "./components/table/ColumnFilter";
 
 const CustomRoute = () => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
+
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter
+    }
+  }, []);
+  
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -102,6 +110,10 @@ const CustomRoute = () => {
               showFilters={true}
               showSorting={true}
               defaultPageSize={10}
+              headerBgColor=""
+              defaultColumn = {defaultColumn}
+              showColumnFilter={true}
+              filteredColumns={["first_name", "email"]}
             />
           }
         />

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   useTable,
   useGlobalFilter,
+  useFilters,
   useSortBy,
   useRowSelect,
   usePagination,
@@ -17,15 +18,33 @@ const Table = ({
   showFilters,
   showSorting,
   defaultPageSize,
+  headerBgColor,
+  defaultColumn,
+  showColumnFilter,
+  filteredColumns,
 }) => {
+  const [showSelectedData, setShowSelectedData] = useState(false);
+  // const modifiedColumns = columns.map((column) => {
+  //   return {
+  //     ...column,
+  //     canFilter:
+  //       showColumnFilter &&
+  //       (filteredColumns ? filteredColumns.includes(column.accessor) : true),
+  //   };
+  // });
+
+  // console.log(modifiedColumns);
+
   const tableInstance = useTable(
     {
       columns: columns,
       data: data,
+      defaultColumn: defaultColumn,
       initialState: {
         pageSize: defaultPageSize,
       },
     },
+    useFilters,
     useGlobalFilter,
     useSortBy,
     usePagination,
@@ -69,6 +88,9 @@ const Table = ({
 
   const { globalFilter } = state;
 
+  const headerBackgroundColor =
+    headerBgColor?.length > 0 ? `bg-${headerBgColor}-500` : "bg-slate-800";
+
   return (
     <div className={`${showFilters ? "pt-5" : "pt-20"}  m-2`}>
       {showFilters && (
@@ -95,7 +117,7 @@ const Table = ({
                         {...column.getHeaderProps(
                           columnIndex === 0 ? {} : column.getSortByToggleProps()
                         )}
-                        className="px-6 py-6 text-left text-md font-bold text-white uppercase bg-slate-800 border-2 border-white"
+                        className={`px-6 py-6 text-left text-md font-bold text-white uppercase ${headerBackgroundColor} border-2 border-white`}
                       >
                         {column.render("Header")}
                         {columnIndex !== 0 && (
@@ -106,6 +128,11 @@ const Table = ({
                                 : "🔼"
                               : "↕️"}
                           </span>
+                        )}
+                        {showColumnFilter && (
+                          <div>
+                            {column.canFilter ? column.render("Filter") : null}
+                          </div>
                         )}
                       </th>
                     ))
@@ -168,7 +195,26 @@ const Table = ({
                     </tr>
                   );
                 })
-                : showPagination === true &&
+              : showPagination === true &&
+                showRowSelection === false &&
+                showFilters === false &&
+                showSorting === true
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === true &&
                 showRowSelection === true &&
                 showFilters === true &&
                 showSorting === false
@@ -195,10 +241,64 @@ const Table = ({
                     </tr>
                   );
                 })
+              : showPagination === false &&
+                showRowSelection === true &&
+                showFilters === true &&
+                showSorting === false
+              ? rows.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
+                    >
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
               : showPagination === true &&
                 showRowSelection === true &&
                 showFilters === false &&
                 showSorting === true
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className={`${
+                        row.isSelected
+                          ? "bg-orange-200"
+                          : "bg-white-100, cursor-pointer"
+                      }`}
+                      onClick={() => row.toggleRowSelected()}
+                    >
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === true &&
+                showRowSelection === true &&
+                showFilters === false &&
+                showSorting === false
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
@@ -271,7 +371,7 @@ const Table = ({
               : showPagination === false &&
                 showRowSelection === true &&
                 showFilters === false &&
-                showSorting === (false || true)
+                showSorting === false
               ? rows.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
@@ -369,16 +469,26 @@ const Table = ({
           </button>
         </div>
       )}
-      {showRowSelection && (
-        <pre>
-          {selectedFlatRows.length > 0
-            ? JSON.stringify(
-                selectedFlatRows.map((row) => row.original),
-                null,
-                2
-              )
-            : null}
-        </pre>
+        {showRowSelection && (
+        <div>
+          <button
+            onClick={() => setShowSelectedData(!showSelectedData)}
+            className="bg-green-500 hover:bg-green-600 py-2 px-4 rounded text-white"
+          >
+            {showSelectedData ? "Hide Selected Data" : "Show Selected Data"}
+          </button>
+          {showSelectedData && (
+            <pre>
+              {selectedFlatRows.length > 0
+                ? JSON.stringify(
+                    selectedFlatRows.map((row) => row.original),
+                    null,
+                    2
+                  )
+                : null}
+            </pre>
+          )}
+        </div>
       )}
     </div>
   );
