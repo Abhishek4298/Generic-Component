@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
@@ -10,6 +11,15 @@ import { useMemo } from "react";
 import ColumnFilter from "./components/table/ColumnFilter";
 
 const CustomRoute = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
 
@@ -26,13 +36,6 @@ const CustomRoute = () => {
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
   };
-
-  const menuItems = [
-    { label: "🏠Home", link: "/", linkedComponent: Home },
-    { label: "🅰️bout", link: "/about", linkedComponent: About },
-    { label: "🎵 Music", link: "/music", linkedComponent: Music },
-    { label: "📞Contact", link: "/contact", linkedComponent: Contact },
-  ];
 
   return (
     <>
@@ -123,12 +126,17 @@ const CustomRoute = () => {
           path="/modal"
           element={
             <div className="flex justify-center">
-              <Modal
-                color="blue"
-                header="Generic Component"
-                content="New Content"
-                position="center"
-              />
+              <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2">
+                Open Modal
+              </button>
+
+
+              <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} content="Modal Body" size="small" position="center">
+                <div>
+                  Extra content
+                </div>
+                
+              </Modal>
             </div>
           }
         />

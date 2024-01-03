@@ -1,52 +1,65 @@
-import React, { useState } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Modal = ({
-  color = "blue",
-  header = "Modal Header",
-  content = "Modal Body",
-  position 
-}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const Modal = ({ isOpen, onClose, children, showCloseIcon, header, content, size, position, customCloseIcon }) => {
+  const modalClasses = isOpen
+    ? `fixed inset-0 flex z-50 ${getPositionClass(position)}`
+    : 'hidden';
 
-  const openDialog = () => {
-    setIsModalOpen(true);
+  const modalSizeClasses = {
+    small: 'w-64',
+    medium: 'w-96',
+    large: 'w-2/3',
+    auto: 'w-auto',
   };
 
-  const closeDialog = () => {
-    setIsModalOpen(false);
-  };
+  const sizeClass = modalSizeClasses[size] || modalSizeClasses.medium;
 
-  const align = position === "center" ? "mt-60" : "mt-0" 
+  function getPositionClass(position)  {
+    switch (position) {
+      case 'left':
+        return 'justify-start items-center';
+      case 'right':
+        return 'justify-end items-center';
+      case 'top':
+        return 'justify-center items-start';
+      case 'bottom':
+        return 'justify-center items-end';
+      default:
+        return 'justify-center items-center';
+    }
+  }
 
   return (
-    <>
-      {!isModalOpen && (
-        <button
-          className={`bg-${color}-500 hover:bg-${color}-600 text-white font-semibold py-2 px-4 rounded`}
-          onClick={openDialog}
-        >
-          Open Dialog
-        </button>
-      )}
-
-      {isModalOpen && (
-        <div className={align}>
-          <div className={`bg-white rounded shadow-lg p-6 max-w-sm mx-auto`}>
-            <h1 className="text-2xl font-bold mb-4">{header}</h1>
-            <div>
-              <h2>{content}</h2>
-            </div>
-            <button
-              className={`mt-3 bg-${color}-500 hover:bg-${color}-600 text-white font-semibold py-2 px-4 rounded`}
-              onClick={closeDialog}
-            >
-              Close Dialog
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+    <div className={`${modalClasses} bg-black bg-opacity-50`}>
+      <div className={`bg-white p-4 rounded-lg shadow-md ${sizeClass} ${getPositionClass(position)}`}>
+        {showCloseIcon && (
+          <button onClick={onClose} className="float-right right-2 top-2 text-gray-600 hover:text-gray-800">
+            {customCloseIcon ? (
+              customCloseIcon
+            ) : (
+              'X' // Default close icon (you can customize it)
+            )}
+          </button>
+        )}
+        {header && <h1 className="text-2xl font-bold mb-4">{header}</h1>}
+        {content && <div>{content}</div>}
+        {children}
+      </div>
+    </div>
   );
+};
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  showCloseIcon: PropTypes.bool,
+  header: PropTypes.string,
+  content: PropTypes.node,
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'auto']),
+  position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+  customCloseIcon: PropTypes.node,
 };
 
 export default Modal;
