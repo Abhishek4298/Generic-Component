@@ -173,24 +173,30 @@ const CustomRoute = () => {
               </button>
               {modalType === 1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="center">
                 <div>
-                  <p class="text-gray-700">
+                  <p class="text-gray-700 my-2">
                     With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <p class="text-gray-700 my-2">
                     The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
                   </p>
                 </div>
               </Modal>}
               {modalType === 2 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="top">
                 <div>
-                <p class="text-gray-700">
+                   <p class="text-gray-700 my-2">
                     With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <p class="text-gray-700 my-2">
                     The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
                   </p>
                 </div>
               </Modal>}
               {modalType === 3 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="bottom">
                 <div>
-                    <p class="text-gray-700">
+                   <p class="text-gray-700 my-2">
                     With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <p class="text-gray-700 my-2">
                     The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
                   </p>
                 </div>
@@ -279,7 +285,7 @@ const CustomRoute = () => {
             </>
           }
         />
-         <Route
+        <Route
           path="/menu/*"
           element={
             <div>
