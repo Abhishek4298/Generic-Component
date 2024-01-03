@@ -3,13 +3,22 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
-import MenuBar from "./components/MenuBar";
-import About from "./components/MenuBar/About";
-import Contact from "./components/MenuBar/Contact";
-import Home from "./components/MenuBar/Home";
-import Music from "./components/MenuBar/Music";
+import Table from "./components/table";
+import Data from "./components/table/data.json";
+import COLUMNS from "./components/table/COLUMNS";
+import { useMemo } from "react";
+import ColumnFilter from "./components/table/ColumnFilter";
 
 const CustomRoute = () => {
+  const columns = useMemo(() => COLUMNS, []);
+  const data = useMemo(() => Data, []);
+
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter
+    }
+  }, []);
+  
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -142,29 +151,21 @@ const CustomRoute = () => {
           }
         />
         <Route
-          path="/menu/*"
+          path="/table"
           element={
-            <div>
-              <MenuBar
-                items={menuItems}
-                backgroundColor="bg-pink-500"
-                textColor="text-white"
-                textSize="text-2xl"
-                font="font-serif"
-                height="h-25"
-                image="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
-                basePath="/menu"
-              />
-              <Routes>
-                {menuItems.map((menu) => (
-                  <Route
-                    key={menu.link}
-                    path={menu.link}
-                    element={<menu.linkedComponent />}
-                  />
-                ))}
-              </Routes>
-            </div>
+            <Table
+              columns={columns}
+              data={data}
+              showPagination={true}
+              showRowSelection={true}
+              showFilters={true}
+              showSorting={true}
+              defaultPageSize={10}
+              headerBgColor=""
+              defaultColumn = {defaultColumn}
+              showColumnFilter={true}
+              filteredColumns={["first_name", "gender"]}
+            />
           }
         />
       </Routes>
