@@ -12,6 +12,7 @@ import Data from "./components/table/data.json";
 import COLUMNS from "./components/table/COLUMNS";
 import { useMemo } from "react";
 import ColumnFilter from "./components/table/ColumnFilter";
+import DatePickerComponent from "./components/DatePicker";
 
 const CustomRoute = () => {
   //Modal code start
@@ -28,7 +29,8 @@ const CustomRoute = () => {
 
 
   // Modal code end
-
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dateRange, setDateRange] = useState([null, null]);
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
 
@@ -45,6 +47,17 @@ const CustomRoute = () => {
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
   };
+
+  const handleDateChange = (date) => {
+    console.log("Selected Date:", date);
+    setSelectedDate(date);
+  };
+
+  const handleDateRangeChange = (dates) => {
+    console.log("Selected Date Range:", dates);
+    setDateRange(dates);
+  };
+
 
   return (
     <>
@@ -266,6 +279,31 @@ const CustomRoute = () => {
               showColumnFilter={true}
               filteredColumns={["first_name", "gender"]}
             />
+          }
+        />
+          <Route
+          path="/datepicker"
+          element={
+            <>
+              {/* <DatePickerComponent
+                selectedDate={selectedDate}
+                onChange={handleDateChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={1}
+                dateBorder="border border-gray-300"
+              /> */}
+              <DatePickerComponent
+                dateFormat="dd-MM-yyyy"
+                startDate={dateRange?.length && dateRange[0]}
+                endDate={dateRange?.length && dateRange[1]}
+                onChange={handleDateRangeChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={1}
+                dateBorder="border border-blue-300"
+              />
+            </>
           }
         />
       </Routes>
