@@ -24,16 +24,6 @@ const Table = ({
   filteredColumns,
 }) => {
   const [showSelectedData, setShowSelectedData] = useState(false);
-  // const modifiedColumns = columns.map((column) => {
-  //   return {
-  //     ...column,
-  //     canFilter:
-  //       showColumnFilter &&
-  //       (filteredColumns ? filteredColumns.includes(column.accessor) : true),
-  //   };
-  // });
-
-  // console.log(modifiedColumns);
 
   const tableInstance = useTable(
     {
@@ -88,6 +78,14 @@ const Table = ({
 
   const { globalFilter } = state;
 
+  tableInstance.columns.forEach((column) => {
+    if (filteredColumns && filteredColumns.includes(column.id)) {
+      column.canFilter = true;
+    } else {
+      column.canFilter = false;
+    }
+  });
+
   const headerBackgroundColor =
     headerBgColor?.length > 0 ? `bg-${headerBgColor}-500` : "bg-slate-800";
 
@@ -111,7 +109,7 @@ const Table = ({
                 {...headerGroup.getHeaderGroupProps()}
                 className="border-b bg-gray-100"
               >
-                {showSorting
+                {showSorting === true && showColumnFilter === true
                   ? headerGroup.headers.map((column, columnIndex) => (
                       <th
                         {...column.getHeaderProps(
@@ -131,7 +129,25 @@ const Table = ({
                         )}
                         {showColumnFilter && (
                           <div>
-                            {column.canFilter ? column.render("Filter") : null}
+                            {column.canFilter === true
+                              ? column.render("Filter")
+                              : null}
+                          </div>
+                        )}
+                      </th>
+                    ))
+                  : showSorting === false && showColumnFilter === true
+                  ? headerGroup.headers.map((column) => (
+                      <th
+                        {...column.getHeaderProps()}
+                        className="px-6 py-6 text-left text-md font-bold text-white uppercase bg-slate-800 border-2 border-white"
+                      >
+                        {column.render("Header")}
+                        {showColumnFilter && (
+                          <div>
+                            {column.canFilter === true
+                              ? column.render("Filter")
+                              : null}
                           </div>
                         )}
                       </th>
@@ -469,11 +485,11 @@ const Table = ({
           </button>
         </div>
       )}
-        {showRowSelection && (
+      {showRowSelection && (
         <div>
           <button
             onClick={() => setShowSelectedData(!showSelectedData)}
-            className="bg-green-500 hover:bg-green-600 py-2 px-4 rounded text-white"
+            className="bg-green-500 hover:bg-green-700 py-3 px-4 rounded text-white text-lg"
           >
             {showSelectedData ? "Hide Selected Data" : "Show Selected Data"}
           </button>
@@ -485,7 +501,7 @@ const Table = ({
                     null,
                     2
                   )
-                : null}
+                : <span className="text-red-500 text-4xl flex justify-center font-bold">No Data Found</span>}
             </pre>
           )}
         </div>

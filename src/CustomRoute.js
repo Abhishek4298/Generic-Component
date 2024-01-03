@@ -113,7 +113,7 @@ const CustomRoute = () => {
               headerBgColor=""
               defaultColumn = {defaultColumn}
               showColumnFilter={true}
-              filteredColumns={["first_name", "email"]}
+              filteredColumns={["first_name", "gender"]}
             />
           }
         />
