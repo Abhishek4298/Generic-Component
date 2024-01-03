@@ -4,6 +4,9 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import CardBody from "./components/Card/CardBody";
+import CardHeader from "./components/Card/CardHeader";
+import CardFooter from "./components/Card/CardFooter";
 import Table from "./components/table";
 import Data from "./components/table/data.json";
 import COLUMNS from "./components/table/COLUMNS";
@@ -214,12 +217,31 @@ const CustomRoute = () => {
           path="/card"
           element={
             <div className="flex">
-              <Card
-                title="Example Card"
-                content="This is a generic card component."
-                imageUrl={sampleImage1}
-                onClick={() => alert("Button clicked!")}
-              />
+              <Card>
+                <CardHeader>
+                  <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
+                </CardHeader>
+                <CardBody>
+                  <img
+                    src="https://placekitten.com/300/200"
+                    alt="Card Preview"
+                    className="mb-4 rounded-lg"
+                  />
+                  <p className="text-gray-700 text-base">
+                    This is the content of the card body. It can contain text, images,
+                    or any other elements you want to display.
+                  </p>
+                </CardBody>
+                <CardFooter>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-gray-500">Posted on January 1, 2024</div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Read More
+                    </button>
+                  </div>
+                </CardFooter>
+              </Card>
+
               <Card
                 title="Example Card"
                 content="This is a generic card component."
