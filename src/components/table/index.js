@@ -136,6 +136,26 @@ const Table = ({
                         )}
                       </th>
                     ))
+                  : showSorting === true && showColumnFilter === false
+                  ? headerGroup.headers.map((column, columnIndex) => (
+                      <th
+                        {...column.getHeaderProps(
+                          columnIndex === 0 ? {} : column.getSortByToggleProps()
+                        )}
+                        className={`px-6 py-6 text-left text-md font-bold text-white uppercase ${headerBackgroundColor} border-2 border-white`}
+                      >
+                        {column.render("Header")}
+                        {columnIndex !== 0 && (
+                          <span className="px-2">
+                            {column.isSorted
+                              ? column.isSortedDesc
+                                ? "🔽"
+                                : "🔼"
+                              : "↕️"}
+                          </span>
+                        )}
+                      </th>
+                    ))
                   : showSorting === false && showColumnFilter === true
                   ? headerGroup.headers.map((column) => (
                       <th
@@ -199,7 +219,8 @@ const Table = ({
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()} 
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
                       {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps()}
@@ -218,7 +239,28 @@ const Table = ({
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()}
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap border-2 border-purple-950"
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              : showPagination === true &&
+                showRowSelection === false &&
+                showFilters === true &&
+                showSorting === false
+              ? page.map((row, rowIndex) => {
+                  tableInstance.prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
                       {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps()}
@@ -345,7 +387,8 @@ const Table = ({
               ? page.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()}
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
                       {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps()}
@@ -418,7 +461,8 @@ const Table = ({
               ? rows.map((row, rowIndex) => {
                   tableInstance.prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()}
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
                       {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps()}
@@ -433,11 +477,12 @@ const Table = ({
               : showPagination === false &&
                 showRowSelection === false &&
                 showFilters === false &&
-                (showSorting === true || showSorting === false)
+                showSorting === true
               ? rows.map((row, rowIndex) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps}>
+                    <tr {...row.getRowProps}
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
                       {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps}
@@ -452,7 +497,8 @@ const Table = ({
               : rows.map((row, rowIndex) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps}>
+                    <tr {...row.getRowProps}
+                    className={rowIndex % 2 === 0 ? "bg-gray-200 p-1" : "bg-gray-100 p-1"}>
                       {row.cells.map((cell) => (
                         <td
                           {...cell.getCellProps}
@@ -495,13 +541,17 @@ const Table = ({
           </button>
           {showSelectedData && (
             <pre>
-              {selectedFlatRows.length > 0
-                ? JSON.stringify(
-                    selectedFlatRows.map((row) => row.original),
-                    null,
-                    2
-                  )
-                : <span className="text-red-500 text-4xl flex justify-center font-bold">No Data Found</span>}
+              {selectedFlatRows.length > 0 ? (
+                JSON.stringify(
+                  selectedFlatRows.map((row) => row.original),
+                  null,
+                  2
+                )
+              ) : (
+                <span className="text-red-500 text-4xl flex justify-center font-bold">
+                  No Selected Data Found
+                </span>
+              )}
             </pre>
           )}
         </div>
