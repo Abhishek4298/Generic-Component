@@ -157,81 +157,42 @@ const CustomRoute = () => {
           }
         />
 
-{/*  Modal code start */}
+        {/*  Modal code start */}
         <Route
           path="/modal"
           element={
             <div className="flex justify-center items-center h-screen">
-              <button onClick={()=>openModal(1)} className="bg-blue-500 text-white px-4 py-2 m-2">
-                Large Modal
+              <button onClick={() => openModal(1)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Center Modal
               </button>
-              <button onClick={()=>openModal(2)} className="bg-blue-500 text-white px-4 py-2 m-2">
-                Small Modal
-              </button>
-              <button onClick={()=>openModal(3)} className="bg-blue-500 text-white px-4 py-2 m-2">
+              <button onClick={() => openModal(2)} className="bg-blue-500 text-white px-4 py-2 m-2">
                 Top Modal
               </button>
-              <button onClick={()=>openModal(4)} className="bg-blue-500 text-white px-4 py-2 m-2">
+              <button onClick={() => openModal(3)} className="bg-blue-500 text-white px-4 py-2 m-2">
                 Bottom Modal
               </button>
-              {modalType ===1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="large" position="center">
+              {modalType === 1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="center">
                 <div>
-                  <h2>Additional Content</h2>
-                  <p>This is more content that you can add to the modal.</p>
-                  <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Another Section</h2>
-                  <p>You can organize your content into different sections within the modal.</p>
+                  <p class="text-gray-700">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
+                  </p>
                 </div>
               </Modal>}
-              {modalType ===2 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="small" position="center">
+              {modalType === 2 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="top">
                 <div>
-                  <h2>Additional Content</h2>
-                  <p>This is more content that you can add to the modal.</p>
-                  <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Another Section</h2>
-                  <p>You can organize your content into different sections within the modal.</p>
+                <p class="text-gray-700">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
+                  </p>
                 </div>
               </Modal>}
-              {modalType ===3 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="small" position="top">
+              {modalType === 3 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="bottom">
                 <div>
-                  <h2>Additional Content</h2>
-                  <p>This is more content that you can add to the modal.</p>
-                  <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Another Section</h2>
-                  <p>You can organize your content into different sections within the modal.</p>
-                </div>
-              </Modal>}
-              {modalType ===4 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="small" position="bottom">
-                <div>
-                  <h2>Additional Content</h2>
-                  <p>This is more content that you can add to the modal.</p>
-                  <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                  </ul>
-                </div>
-                <div>
-                  <h2>Another Section</h2>
-                  <p>You can organize your content into different sections within the modal.</p>
+                    <p class="text-gray-700">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
+                  </p>
                 </div>
               </Modal>}
             </div>
@@ -293,7 +254,7 @@ const CustomRoute = () => {
             />
           }
         />
-          <Route
+        <Route
           path="/datepicker"
           element={
             <>
