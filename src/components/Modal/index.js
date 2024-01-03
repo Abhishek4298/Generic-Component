@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const Modal = ({ isOpen, onClose, children, showCloseIcon, header, content, size, position, customCloseIcon }) => {
+import { closeIcon } from "../../constant";
+import { tw } from "@twind/react";
+const Modal = ({ isOpen, onClose, children, showCloseIcon, header, content, size, position, customCloseIcon,showBorder,borderColor,borderWidth }) => {
   const modalClasses = isOpen
     ? `fixed inset-0 flex z-50 ${getPositionClass(position)}`
     : 'hidden';
@@ -32,13 +33,13 @@ const Modal = ({ isOpen, onClose, children, showCloseIcon, header, content, size
 
   return (
     <div className={`${modalClasses} bg-black bg-opacity-50`}>
-      <div className={`bg-white p-4 rounded-lg shadow-md ${sizeClass} ${getPositionClass(position)}`}>
+      <div className={tw`${showBorder ? `border border-${borderWidth} border-${borderColor}-900`:'border-none'} bg-white p-4 shadow-md ${sizeClass} ${getPositionClass(position)}`}>
         {showCloseIcon && (
           <button onClick={onClose} className="float-right right-2 top-2 text-gray-600 hover:text-gray-800">
             {customCloseIcon ? (
               customCloseIcon
             ) : (
-              'X' // Default close icon (you can customize it)
+              closeIcon // Default close icon (you can customize it)
             )}
           </button>
         )}
@@ -60,6 +61,15 @@ Modal.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large', 'auto']),
   position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
   customCloseIcon: PropTypes.node,
+  showBorder: PropTypes.bool,
+  borderColor: PropTypes.string,
+  borderWidth: PropTypes.string
 };
-
+Modal.defaultProps = {
+  showCloseIcon: true,
+  size: 'auto',
+  showBorder: false,
+  borderColor: 'black',
+  borderWidth: '2'
+};
 export default Modal;
