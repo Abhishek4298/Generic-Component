@@ -3,6 +3,7 @@ import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
+import Accordion from "./components/Accordian";
 
 const CustomRoute = () => {
   const handleClick = () => {
@@ -12,6 +13,33 @@ const CustomRoute = () => {
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
   };
+
+  const accordionItems = [
+    {
+      title: "Introduction",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu velit nec quam consectetur vestibulum vel eget libero.",
+      imageUrl: "https://clipart-library.com/images/LTd5pnrMc.jpg",
+    },
+    {
+      title: "Features",
+      content:
+        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+      imageUrl: "https://clipart-library.com/images/kiMKznyKT.jpg",
+    },
+    {
+      title: "Usage",
+      content:
+        "Duis vehicula elit at purus dapibus, eu feugiat sem feugiat. Praesent nec lacus vel purus sodales hendrerit. Sed ac nunc ut elit auctor lacinia.",
+      imageUrl: "https://clipart-library.com/images/8TGEyr9Gc.jpg",
+    },
+    {
+      title: "Support",
+      content:
+        "Fusce ac nulla vitae ex varius aliquet id vitae quam. Etiam rhoncus tellus in lectus feugiat, vel scelerisque leo vestibulum. Aenean laoreet nisl vel est iaculis, vitae malesuada augue fermentum.",
+      imageUrl: "https://clipart-library.com/images/yikA6Ep6T.jpg",
+    },
+  ];
 
   return (
     <>
@@ -83,6 +111,22 @@ const CustomRoute = () => {
                 onClick={() => alert("Button clicked!")}
               />
             </div>
+          }
+        />
+        <Route
+          path="/accordion"
+          element={
+            <Accordion
+              items={accordionItems}
+              headerBgColor="blue"
+              itemsPosition="center"
+              ttitleColor="white"
+              contentBgColor="white"
+              contentColor="orange"
+              headerSize="36"
+              contentSize="24"
+              accordionWidth="40"
+            />
           }
         />
       </Routes>
