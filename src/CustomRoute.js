@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
@@ -34,51 +35,100 @@ const CustomRoute = () => {
         <Route
           path="/button"
           element={
-            <div className="flex justify-center items-center h-screen">
-              <div className="grid grid-cols-3">
-                <Button
-                  color="red"
-                  borderColor="purple"
-                  rounded="md"
-                  size="lg"
-                  onClick={handleClick}
-                >
-                  Basic Button
-                </Button>
-                <Button
-                  color="blue"
-                  borderColor="blue"
-                  rounded="md"
-                  icon={trueIcon}
-                  iconPosition="left"
-                  onClick={() => handleClickTwo("Custom Value")}
-                >
-                  Button with Icon
-                </Button>
-                <Button
-                  color="yellow"
-                  borderColor="blue"
-                  rounded="md"
-                  icon={trueIcon}
-                  iconPosition="right"
-                  onClick={() => handleClickTwo("Custom Value")}
-                >
-                  Button with Icon
-                </Button>
+            <>
+              <div className="flex justify-center items-center h-screen">
+                <div className="grid grid-cols-3 gap-8 p-8 bg-gray-100 rounded-lg shadow-md">
+                  <div className="space-y-4">
+                    <h1 class="text-2xl font-bold mb-4">Generic Button</h1>
+                    <Button>Default Button</Button>
+                    <Button
+                      borderColor="blue"
+                      textColor="blue"
+                      hoverColor="red"
+                      hoverColorStrength="800"
+                      className="mx-4"
+                    >
+                      Outline
+                    </Button>
+                    <Button
+                      color="purple"
+                      colorStrength="100"
+                      borderColor="blue"
+                      hoverColor="red"
+                      hoverColorStrength="100"
+                      rounded="md"
+                      textColor="red"
+                      size="lg"
+                      onClick={handleClick}
+                      className="italic mx-4"
+                    >
+                      Primary Button
+                    </Button>
+                    <Button
+                      color="purple"
+                      colorStrength="100"
+                      borderColor="blue"
+                      hoverColor="red"
+                      hoverColorStrength="100"
+                      rounded="full"
+                      textColor="red"
+                      size="lg"
+                      onClick={handleClick}
+                      className="mx-4"
+                    >
+                      Border Radius
+                    </Button>
+                    <Button
+                      color="pink"
+                      colorStrength="100"
+                      hoverColor="red"
+                      hoverColorStrength="300"
+                      borderColor="yellow"
+                      rounded="md"
+                      icon={trueIcon}
+                      iconPosition="left"
+                      onClick={() => handleClickTwo("Custom Value")}
+                    >
+                      Icon Button
+                    </Button>
+                    <Button
+                      color="yellow"
+                      colorStrength="100"
+                      borderColor="green"
+                      rounded="md"
+                      icon={trueIcon}
+                      iconPosition="right"
+                      onClick={() => handleClickTwo("Custom Value")}
+                      className="mx-2"
+                    >
+                      Icon Button
+                    </Button>
+                  </div>
+                  <div className="flex flex-col space-y-4 mt-4">
+                    <Button size="small">Small</Button>
+                    <Button size="medium">Medium</Button>
+                    <Button size="large">Large</Button>
+                  </div>
+                </div>
               </div>
-            </div>
+            </>
           }
         />
         <Route
           path="/modal"
           element={
             <div className="flex justify-center">
-              <Modal
-                color="blue"
-                header="Generic Component"
-                content="New Content"
-                position="center"
-              />
+              <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2">
+                Open Modal
+              </button>
+
+
+              <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} content="Modal Body" size="small" position="center">
+                <div>
+                  Extra content
+                </div>
+                
+              </Modal>
             </div>
           }
         />
@@ -86,12 +136,31 @@ const CustomRoute = () => {
           path="/card"
           element={
             <div className="flex">
-              <Card
-                title="Example Card"
-                content="This is a generic card component."
-                imageUrl={sampleImage1}
-                onClick={() => alert("Button clicked!")}
-              />
+              <Card>
+                <CardHeader>
+                  <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
+                </CardHeader>
+                <CardBody>
+                  <img
+                    src="https://placekitten.com/300/200"
+                    alt="Card Preview"
+                    className="mb-4 rounded-lg"
+                  />
+                  <p className="text-gray-700 text-base">
+                    This is the content of the card body. It can contain text, images,
+                    or any other elements you want to display.
+                  </p>
+                </CardBody>
+                <CardFooter>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-gray-500">Posted on January 1, 2024</div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Read More
+                    </button>
+                  </div>
+                </CardFooter>
+              </Card>
+
               <Card
                 title="Example Card"
                 content="This is a generic card component."
@@ -104,14 +173,14 @@ const CustomRoute = () => {
           path="/datepicker"
           element={
             <>
-              {/* <DatePickerComponent
+              <DatePickerComponent
                 selectedDate={selectedDate}
                 onChange={handleDateChange}
                 closeOnSelect={true}
                 isClear={true}
                 monthShown={1}
                 dateBorder="border border-gray-300"
-              /> */}
+              />
               <DatePickerComponent
                 dateFormat="dd-MM-yyyy"
                 startDate={dateRange?.length && dateRange[0]}
