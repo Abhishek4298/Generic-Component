@@ -11,15 +11,21 @@ import { useMemo } from "react";
 import ColumnFilter from "./components/table/ColumnFilter";
 
 const CustomRoute = () => {
+  //Modal code start
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
+  const [modalType, setModalType] = useState(0);
+  const openModal = (modalType) => {
     setIsModalOpen(true);
+    setModalType(modalType);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+
+  // Modal code end
+
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
 
@@ -28,7 +34,7 @@ const CustomRoute = () => {
       Filter: ColumnFilter
     }
   }, []);
-  
+
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -122,24 +128,88 @@ const CustomRoute = () => {
             </>
           }
         />
+
+{/*  Modal code start */}
         <Route
           path="/modal"
           element={
-            <div className="flex justify-center">
-              <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2">
-                Open Modal
+            <div className="flex justify-center items-center h-screen">
+              <button onClick={()=>openModal(1)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Large Modal
               </button>
-
-
-              <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} content="Modal Body" size="small" position="center">
+              <button onClick={()=>openModal(2)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Small Modal
+              </button>
+              <button onClick={()=>openModal(3)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Top Modal
+              </button>
+              <button onClick={()=>openModal(4)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Bottom Modal
+              </button>
+              {modalType ===1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="large" position="center">
                 <div>
-                  Extra content
+                  <h2>Additional Content</h2>
+                  <p>This is more content that you can add to the modal.</p>
+                  <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                  </ul>
                 </div>
-                
-              </Modal>
+                <div>
+                  <h2>Another Section</h2>
+                  <p>You can organize your content into different sections within the modal.</p>
+                </div>
+              </Modal>}
+              {modalType ===2 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="small" position="center">
+                <div>
+                  <h2>Additional Content</h2>
+                  <p>This is more content that you can add to the modal.</p>
+                  <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                  </ul>
+                </div>
+                <div>
+                  <h2>Another Section</h2>
+                  <p>You can organize your content into different sections within the modal.</p>
+                </div>
+              </Modal>}
+              {modalType ===3 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="small" position="top">
+                <div>
+                  <h2>Additional Content</h2>
+                  <p>This is more content that you can add to the modal.</p>
+                  <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                  </ul>
+                </div>
+                <div>
+                  <h2>Another Section</h2>
+                  <p>You can organize your content into different sections within the modal.</p>
+                </div>
+              </Modal>}
+              {modalType ===4 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" size="small" position="bottom">
+                <div>
+                  <h2>Additional Content</h2>
+                  <p>This is more content that you can add to the modal.</p>
+                  <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                  </ul>
+                </div>
+                <div>
+                  <h2>Another Section</h2>
+                  <p>You can organize your content into different sections within the modal.</p>
+                </div>
+              </Modal>}
             </div>
           }
         />
+        {/*  Modal code end */}
         <Route
           path="/card"
           element={
@@ -170,7 +240,7 @@ const CustomRoute = () => {
               showSorting={true}
               defaultPageSize={10}
               headerBgColor=""
-              defaultColumn = {defaultColumn}
+              defaultColumn={defaultColumn}
               showColumnFilter={true}
               filteredColumns={["first_name", "gender"]}
             />
