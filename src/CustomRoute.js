@@ -1,10 +1,20 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import { sampleImage1, trueIcon } from "./constant";
 
 const CustomRoute = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -21,7 +31,7 @@ const CustomRoute = () => {
           element={
             <div className="flex justify-center items-center h-screen">
               <div className="grid grid-cols-3">
-                <Button
+              <Button
                   color="red"
                   borderColor="purple"
                   rounded="md"
@@ -58,12 +68,17 @@ const CustomRoute = () => {
           path="/modal"
           element={
             <div className="flex justify-center">
-              <Modal
-                color="blue"
-                header="Generic Component"
-                content="New Content"
-                position="center"
-              />
+              <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2">
+                Open Modal
+              </button>
+
+
+              <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} content="Modal Body" size="small" position="center">
+                <div>
+                  Extra content
+                </div>
+                
+              </Modal>
             </div>
           }
         />
