@@ -104,22 +104,23 @@ const CustomRoute = () => {
           path="/datepicker"
           element={
             <>
-              <DatePickerComponent
+              {/* <DatePickerComponent
                 selectedDate={selectedDate}
                 onChange={handleDateChange}
                 closeOnSelect={true}
                 isClear={true}
-                monthShown={2}
+                monthShown={1}
                 dateBorder="border border-gray-300"
-              />
+              /> */}
               <DatePickerComponent
-                startDate={dateRange[0]}
-                endDate={dateRange[1]}
+                dateFormat="dd-MM-yyyy"
+                startDate={dateRange?.length && dateRange[0]}
+                endDate={dateRange?.length && dateRange[1]}
                 onChange={handleDateRangeChange}
                 closeOnSelect={true}
                 isClear={true}
-                monthShown={3}
-                dateBorder="border border-red-300"
+                monthShown={1}
+                dateBorder="border border-blue-300"
               />
             </>
           }

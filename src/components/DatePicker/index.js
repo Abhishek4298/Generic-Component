@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./styles.css";
 
 const DatePickerComponent = ({
+  dateFormat,
   selectedDate,
   onChange,
   startDate,
@@ -28,40 +30,47 @@ const DatePickerComponent = ({
   return (
     <>
       <div className="relative flex justify-center items-center">
-        <h1 className="m-3">Date Picker</h1>
+        <h1 className="m-6">Select Date</h1>
         <DatePicker
           selected={dateSelected}
           onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
+          dateFormat={dateFormat}
+          showYearDropdown
+          scrollableMonthYearDropdown
           shouldCloseOnSelect={closeOnSelect}
           isClearable={isClear}
           monthsShown={monthShown}
           className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
       </div>
-      <div className="flex space-x-2">
-        <h1>Range Date Picker</h1>
+      <div className="relative flex justify-center items-center">
+        <h1 className="m-5">Start Date</h1>
         <DatePicker
           selected={dateRange[0]}
           onChange={(date) => handleRangeDateChange([date, dateRange[1]])}
           startDate={dateRange[0]}
           endDate={dateRange[1]}
           selectsStart
-          dateFormat="dd/MM/yyyy"
+          dateFormat={dateFormat}
+          minDate={new Date()}
           showYearDropdown
+          scrollableMonthYearDropdown
           shouldCloseOnSelect={closeOnSelect}
           isClearable={isClear}
           monthsShown={monthShown}
           className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
+         <h1 className="m-5">End Date</h1>
         <DatePicker
           selected={dateRange[1]}
           onChange={(date) => handleRangeDateChange([dateRange[0], date])}
           startDate={dateRange[0]}
           endDate={dateRange[1]}
           selectsEnd
-          dateFormat="dd/MM/yyyy"
+          dateFormat={dateFormat}
+          minDate={dateRange[1]}
           showYearDropdown
+          scrollableMonthYearDropdown
           shouldCloseOnSelect={closeOnSelect}
           isClearable={isClear}
           monthsShown={monthShown}
