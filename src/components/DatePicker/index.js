@@ -12,10 +12,12 @@ const DatePickerComponent = ({
   closeOnSelect,
   isClear,
   monthShown,
-  dateBorder
+  dateBorder,
 }) => {
   const [dateSelected, setSelectedDate] = useState(selectedDate);
   const [dateRange, setDateRange] = useState([startDate, endDate]);
+  const [displayedDate, setDisplayedDate] = useState(null);
+  const [buttonText, setButtonText] = useState("Show Selected Date");
 
   const handleRangeDateChange = (dates) => {
     setDateRange(dates);
@@ -25,6 +27,36 @@ const DatePickerComponent = ({
   const handleDateChange = (date) => {
     setSelectedDate(date);
     onChange(date);
+  };
+
+  const handleToggleVisibility = () => {
+    if (!displayedDate) {
+      let displayedDateText = "";
+      if (dateRange[0] && dateRange[1] && dateSelected) {
+        displayedDateText = `Selected Date: ${dateSelected.toLocaleDateString(
+          "en-GB"
+        )}
+        Selected Date Range: ${dateRange[0].toLocaleDateString(
+          "en-GB"
+        )} to ${dateRange[1].toLocaleDateString("en-GB")}`;
+      } else if (dateRange[0] && dateRange[1]) {
+        displayedDateText = `Selected Date Range: ${dateRange[0].toLocaleDateString(
+          "en-GB"
+        )} to ${dateRange[1].toLocaleDateString()}`;
+      } else if (dateSelected) {
+        displayedDateText = `Selected Date: ${dateSelected.toLocaleDateString(
+          "en-GB"
+        )}`;
+      } else {
+        displayedDateText = "No date selected";
+      }
+
+      setDisplayedDate(displayedDateText);
+      setButtonText("Hide Selected Date");
+    } else {
+      setDisplayedDate(null);
+      setButtonText("Show Selected Date");
+    }
   };
 
   return (
@@ -60,7 +92,7 @@ const DatePickerComponent = ({
           monthsShown={monthShown}
           className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
-         <h1 className="m-5">End Date</h1>
+        <h1 className="m-5">End Date</h1>
         <DatePicker
           selected={dateRange[1]}
           onChange={(date) => handleRangeDateChange([dateRange[0], date])}
@@ -76,6 +108,24 @@ const DatePickerComponent = ({
           monthsShown={monthShown}
           className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
+      </div>
+      <div className="flex justify-center">
+        <button
+          onClick={handleToggleVisibility}
+          className="bg-blue-500 text-white p-2 mt-4 rounded-md cursor-pointer"
+        >
+          {buttonText}
+        </button>
+      </div>
+      <div className="mt-4 text-2xl">
+        {displayedDate !== "No date selected" && (
+          <p className="text-center">{displayedDate}</p>
+        )}
+        {displayedDate === "No date selected" && (
+          <p className="text-center text-red-700 text-3xl font-bold">
+            {displayedDate}
+          </p>
+        )}
       </div>
     </>
   );
