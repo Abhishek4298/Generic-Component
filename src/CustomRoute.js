@@ -34,7 +34,6 @@ const CustomRoute = () => {
 
 
   // Modal code end
-  // const [selectedDate, setSelectedDate] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
@@ -53,10 +52,6 @@ const CustomRoute = () => {
     alert(`Button clicked with data: ${data}`);
   };
 
-  // const handleDateChange = (date) => {
-  //   console.log("Selected Date:", date);
-  //   setSelectedDate(date);
-  // };
 
   const handleDateRangeChange = (dates) => {
     console.log("Selected Date Range:", dates);
