@@ -34,7 +34,7 @@ const CustomRoute = () => {
 
 
   // Modal code end
-  const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
@@ -53,10 +53,10 @@ const CustomRoute = () => {
     alert(`Button clicked with data: ${data}`);
   };
 
-  const handleDateChange = (date) => {
-    console.log("Selected Date:", date);
-    setSelectedDate(date);
-  };
+  // const handleDateChange = (date) => {
+  //   console.log("Selected Date:", date);
+  //   setSelectedDate(date);
+  // };
 
   const handleDateRangeChange = (dates) => {
     console.log("Selected Date Range:", dates);
@@ -174,7 +174,7 @@ const CustomRoute = () => {
               {modalType === 1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} modalWidth={400} position="center">
                 <div>
                   <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
                       Terms of Service
                     </h3>
                   </div>
