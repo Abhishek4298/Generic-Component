@@ -1,6 +1,6 @@
 import React from "react";
-import SideNav from "./components/SideNav";
-import CustomRoute from "./CustomRoute";
+// import SideNav from "./components/SideNav";
+// import CustomRoute from "./CustomRoute";
 import Home from "./components/MenuBar/Home";
 
 const App = () => {
