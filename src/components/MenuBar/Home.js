@@ -204,7 +204,7 @@ const Home = () => {
           <p className="text-gray-700 text-base">
             Organizes information into a contained and visually distinct unit.
           </p>
-          <div className='my-4'>
+          <div className='my-4 flex'>
             <Card width={350}>
               <CardHeader>
                 <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
@@ -229,6 +229,31 @@ const Home = () => {
                 </div>
               </CardFooter>
             </Card>
+            <Card className="mx-20" width={350} hoverEffect={true}>
+              <CardHeader>
+                <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
+              </CardHeader>
+              <CardBody>
+                <img
+                  src="https://placekitten.com/300/200"
+                  alt="Card Preview"
+                  className="mb-4 rounded-lg"
+                />
+                <p className="text-gray-700 text-base">
+                  This is the content of the card body. It can contain text, images,
+                  or any other elements you want to display.
+                </p>
+              </CardBody>
+              <CardFooter>
+                <div className="flex justify-between items-center">
+                  <div className="text-sm text-gray-500">Posted on January 1, 2024</div>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Read More
+                  </button>
+                </div>
+              </CardFooter>
+            </Card>
+
           </div>
         </CardBody>
       </Card>
@@ -239,10 +264,10 @@ const Home = () => {
         <CardBody>
 
           <p className="text-gray-700 text-base">
-          To give header and data it will provide features like pagination, selecting a row etc.
+            To give header and data it will provide features like pagination, selecting a row etc.
           </p>
           <div className='my-4'>
-          <Table
+            <Table
               columns={columns}
               data={data}
               showPagination={true}
@@ -265,19 +290,230 @@ const Home = () => {
         <CardBody>
 
           <p className="text-gray-700 text-base">
-          Enables users to select dates from a calendar.
+            Enables users to select dates from a calendar.
           </p>
           <div className='my-4'>
-          <DatePickerComponent
-                dateFormat="dd-MM-yyyy"
-                startDate={dateRange?.length && dateRange[0]}
-                endDate={dateRange?.length && dateRange[1]}
-                onChange={handleDateRangeChange}
-                closeOnSelect={true}
-                isClear={true}
-                monthShown={1}
-                dateBorder="border border-blue-300"
-              />
+            <DatePickerComponent
+              dateFormat="dd-MM-yyyy"
+              startDate={dateRange?.length && dateRange[0]}
+              endDate={dateRange?.length && dateRange[1]}
+              onChange={handleDateRangeChange}
+              closeOnSelect={true}
+              isClear={true}
+              monthShown={1}
+              dateBorder="border border-blue-300"
+            />
+          </div>
+        </CardBody>
+      </Card>
+      <hr ></hr>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Search Input</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Searching for data from data layer.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Form Input Controllers </h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          For the Form Input : Input text, Input Number, Checkbox, dropdown, radio.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Side Navigation Panel </h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          To Navigate between different pages.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Breadcrums</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          To show user for the current location of the page and go to previous pages.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Menu Bar</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          To Switch between different pages.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Toast Messages</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          To alert the User with a specific alert message.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Toggle Switch</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Offers a binary choice, typically used for turning settings on or off.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Progress Bar</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Visualizes the completion status of a task or process.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Slider</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Allows users to select a value from a range by moving a slider handle.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Accordian</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Condenses and expands content sections to save space on the interface.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">File Upload/Input</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Allows users to upload files or select files from their device.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Loader/Spinner</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Indicates that a process is ongoing or content is loading.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Tooltip</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Provides additional information when hovering over an element.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Carousel</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Displays a rotating set of images or content.
+          </p>
+          <div className='my-4'>
+           Inprogress...
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Rating/Review</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Allows users to provide and view ratings or reviews
+          </p>
+          <div className='my-4'>
+           Inprogress...
           </div>
         </CardBody>
       </Card>
