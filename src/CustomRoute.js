@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
-import { sampleImage1, trueIcon } from "./constant";
+import { trueIcon } from "./constant";
 import CardBody from "./components/Card/CardBody";
 import CardHeader from "./components/Card/CardHeader";
 import CardFooter from "./components/Card/CardFooter";
@@ -11,8 +12,30 @@ import Data from "./components/table/data.json";
 import COLUMNS from "./components/table/COLUMNS";
 import { useMemo } from "react";
 import ColumnFilter from "./components/table/ColumnFilter";
+import DatePickerComponent from "./components/DatePicker";
+import MenuBar from "./components/MenuBar";
+import About from "./components/MenuBar/About";
+import Contact from "./components/MenuBar/Contact";
+import Home from "./components/MenuBar/Home";
+import Music from "./components/MenuBar/Music";
 
 const CustomRoute = () => {
+  //Modal code start
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(0);
+  const openModal = (modalType) => {
+    setIsModalOpen(true);
+    setModalType(modalType);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  // Modal code end
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dateRange, setDateRange] = useState([null, null]);
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => Data, []);
 
@@ -21,7 +44,7 @@ const CustomRoute = () => {
       Filter: ColumnFilter
     }
   }, []);
-  
+
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -29,6 +52,24 @@ const CustomRoute = () => {
   const handleClickTwo = (data) => {
     alert(`Button clicked with data: ${data}`);
   };
+
+  const handleDateChange = (date) => {
+    console.log("Selected Date:", date);
+    setSelectedDate(date);
+  };
+
+  const handleDateRangeChange = (dates) => {
+    console.log("Selected Date Range:", dates);
+    setDateRange(dates);
+  };
+
+  const menuItems = [
+    { label: "🏠Home", link: "/", linkedComponent: Home },
+    { label: "🅰️bout", link: "/about", linkedComponent: About },
+    { label: "🎵 Music", link: "/music", linkedComponent: Music },
+    { label: "📞Contact", link: "/contact", linkedComponent: Contact },
+  ];
+
 
   return (
     <>
@@ -115,19 +156,66 @@ const CustomRoute = () => {
             </>
           }
         />
+
+        {/*  Modal code start */}
         <Route
           path="/modal"
           element={
-            <div className="flex justify-center">
-              <Modal
-                color="blue"
-                header="Generic Component"
-                content="New Content"
-                position="center"
-              />
+            <div className="flex justify-center items-center h-screen">
+              <button onClick={() => openModal(1)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Center Modal
+              </button>
+              <button onClick={() => openModal(2)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Top Modal
+              </button>
+              <button onClick={() => openModal(3)} className="bg-blue-500 text-white px-4 py-2 m-2">
+                Bottom Modal
+              </button>
+              {modalType === 1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} modalWidth={400} position="center">
+                <div>
+                  <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                      Terms of Service
+                    </h3>
+                  </div>
+                  <div class="p-4 md:p-5 space-y-4">
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                      With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                    </p>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                      The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                    </p>
+                  </div>
+                  <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                    <button data-modal-hide="default-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                  </div>
+                </div>
+              </Modal>}
+              {modalType === 2 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="top">
+                <div>
+                  <p class="text-gray-700 my-2">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <p class="text-gray-700 my-2">
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
+                  </p>
+                </div>
+              </Modal>}
+              {modalType === 3 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="bottom">
+                <div>
+                  <p class="text-gray-700 my-2">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <p class="text-gray-700 my-2">
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
+                  </p>
+                </div>
+              </Modal>}
             </div>
           }
         />
+        {/*  Modal code end */}
         <Route
           path="/card"
           element={
@@ -177,10 +265,61 @@ const CustomRoute = () => {
               showSorting={true}
               defaultPageSize={10}
               headerBgColor=""
-              defaultColumn = {defaultColumn}
+              defaultColumn={defaultColumn}
               showColumnFilter={true}
               filteredColumns={["first_name", "gender"]}
             />
+          }
+        />
+        <Route
+          path="/datepicker"
+          element={
+            <>
+              {/* <DatePickerComponent
+                selectedDate={selectedDate}
+                onChange={handleDateChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={1}
+                dateBorder="border border-gray-300"
+              /> */}
+              <DatePickerComponent
+                dateFormat="dd-MM-yyyy"
+                startDate={dateRange?.length && dateRange[0]}
+                endDate={dateRange?.length && dateRange[1]}
+                onChange={handleDateRangeChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={1}
+                dateBorder="border border-blue-300"
+              />
+            </>
+          }
+        />
+        <Route
+          path="/menu/*"
+          element={
+            <div>
+              <MenuBar
+                items={menuItems}
+                backgroundColor="bg-pink-500"
+                textColor="text-white"
+                textSize="text-2xl"
+                font="font-serif"
+                height="h-25"
+                image="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+                basePath="/menu"
+              />
+              <Routes>
+                {menuItems.map((menu) => (
+                  <Route
+                    key={menu.link}
+                    path={menu.link}
+                    element={<menu.linkedComponent />}
+                  />
+                ))}
+              </Routes>
+            </div>
           }
         />
       </Routes>
