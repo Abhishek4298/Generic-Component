@@ -12,7 +12,6 @@ import Data from "../table/data.json";
 import Table from "../table";
 import ColumnFilter from "../table/ColumnFilter";
 import DatePickerComponent from "../DatePicker";
-import { Route, Routes } from "react-router-dom";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +23,6 @@ const Home = () => {
       Filter: ColumnFilter,
     };
   }, []);
-  const [selectedDate, setSelectedDate] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const menuItems = [
     {
