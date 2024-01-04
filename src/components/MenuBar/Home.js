@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import CardFooter from "../Card/CardFooter";
+import MenuBar from "../MenuBar";
 import Card from "../Card";
 import CardHeader from "../Card/CardHeader";
 import CardBody from "../Card/CardBody";
@@ -11,6 +12,8 @@ import Data from "../table/data.json";
 import Table from "../table";
 import ColumnFilter from "../table/ColumnFilter";
 import DatePickerComponent from "../DatePicker";
+import { Route, Routes } from "react-router-dom";
+
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(0);
@@ -23,6 +26,44 @@ const Home = () => {
   }, []);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
+  const menuItems = [
+    {
+      label: "Home",
+      link: "/",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 italic">
+          <h1>This is Home component</h1>
+        </div>
+      ),
+    },
+    {
+      label: "About",
+      link: "/about",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 font-thin">
+          <h1>This is About component</h1>
+        </div>
+      ),
+    },
+    {
+      label: "Music",
+      link: "/music",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 font-semibold">
+          <h1>This is Music component</h1>
+        </div>
+      ),
+    },
+    {
+      label: "Contact",
+      link: "/contact",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 font-bold">
+          <h1>This is Contact component</h1>
+        </div>
+      ),
+    },
+  ];
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -43,7 +84,7 @@ const Home = () => {
     <div className="bg-gray-100 min-h-screen p-8 mt-20">
       <Card className="mt-2">
         <CardHeader>
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-3xl underline font-bold text-gray-800">
             Introduction to Generic Components with React
           </h2>
         </CardHeader>
@@ -231,7 +272,7 @@ const Home = () => {
                 >
                   <div>
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
                         Terms of Service
                       </h3>
                     </div>
@@ -419,6 +460,31 @@ const Home = () => {
             />
           </div>
         </CardBody>
+        <CardFooter>
+          <div>
+            <h4 className="font-bold text-xl underline mb-3">
+              Code require to make the Generic Table Component.
+            </h4>
+            <pre className="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+              <code>
+                {`
+               <Table
+                  columns={columns}
+                  data={data}
+                  showPagination={true}
+                  showRowSelection={true}
+                  showFilters={true}
+                  showSorting={true}
+                  defaultPageSize={10}
+                  headerBgColor=""
+                  defaultColumn={defaultColumn}
+                  showColumnFilter={true}
+                  filteredColumns={["first_name", "gender"]}
+                />`}
+              </code>
+            </pre>
+          </div>
+        </CardFooter>
       </Card>
       <Card className="mt-2">
         <CardHeader>
@@ -430,7 +496,7 @@ const Home = () => {
           <p className="text-gray-700 text-base">
             Enables users to select dates from a calendar.
           </p>
-          <div className="my-4">
+          <div className="my-4 h-96">
             <DatePickerComponent
               dateFormat="dd-MM-yyyy"
               startDate={dateRange?.length && dateRange[0]}
@@ -444,7 +510,35 @@ const Home = () => {
           </div>
         </CardBody>
       </Card>
-      <hr></hr>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">
+            Menubar
+          </h2>
+        </CardHeader>
+        <CardBody>
+          <p className="text-gray-700 text-base">
+            <MenuBar
+              items={menuItems}
+              backgroundColor="blue"
+              textColor="white"
+              textSize="2xl"
+              fontFamily="serif"
+              navHeight="30"
+              logoImageURL="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+              basePath="/menu"
+              imageHeight="16"
+              imageWidth="20"
+              spaceNavItems="5"
+              itemsLinkHoverColor="gray"
+              itemsLinkHoverColorStrength="800"
+              navItemPosition="right"
+              logoPosition="left"
+            />
+          </p>
+        </CardBody>
+      </Card>
+      <hr />
       <Card className="mt-2">
         <CardHeader>
           <h2 className="text-xl font-bold text-gray-800">Search Input</h2>
