@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import CardFooter from '../Card/CardFooter';
 import Card from '../Card';
 import CardHeader from '../Card/CardHeader';
@@ -6,10 +6,23 @@ import CardBody from '../Card/CardBody';
 import { trueIcon } from '../../constant';
 import Button from '../Button';
 import Modal from '../Modal';
-
+import COLUMNS from '../table/COLUMNS';
+import Data from "../table/data.json";
+import Table from "../table";
+import ColumnFilter from '../table/ColumnFilter';
+import DatePickerComponent from '../DatePicker';
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(0);
+  const columns = useMemo(() => COLUMNS, []);
+  const data = useMemo(() => Data, []);
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter
+    }
+  }, []);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dateRange, setDateRange] = useState([null, null]);
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -21,6 +34,10 @@ const Home = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+  const handleDateRangeChange = (dates) => {
+    console.log("Selected Date Range:", dates);
+    setDateRange(dates);
   };
   return (
     <div className="bg-gray-100 min-h-screen p-8">
@@ -96,10 +113,24 @@ const Home = () => {
             >
               Icon Button
             </Button>
+            <Button
+              color="green"
+              colorStrength="300"
+              borderColor="red"
+              hoverColor="red"
+              hoverColorStrength="100"
+              rounded="md"
+              textColor="white"
+              size="lg"
+              onClick={handleClick}
+              className="font-extrabold mx-4"
+            >
+              Primary Button
+            </Button>
           </div>
         </CardBody>
       </Card>
-      <Card>
+      <Card className="mt-2">
         <CardHeader>
           <h2 className="text-xl font-bold text-gray-800">Modal component</h2>
         </CardHeader>
@@ -109,7 +140,7 @@ const Home = () => {
             Popup will appear.
           </p>
           <div className='my-4'>
-          <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center">
               <button onClick={() => openModal(1)} className="bg-blue-500 text-white px-4 py-2 m-2">
                 Center Modal
               </button>
@@ -164,40 +195,89 @@ const Home = () => {
           </div>
         </CardBody>
       </Card>
-      <Card>
+      <Card className="mt-2">
         <CardHeader>
           <h2 className="text-xl font-bold text-gray-800">Card component</h2>
         </CardHeader>
         <CardBody>
 
           <p className="text-gray-700 text-base">
-            Passing props can change the layout of Button component as expected.
+            Organizes information into a contained and visually distinct unit.
           </p>
           <div className='my-4'>
-            <Card width={500}>
-                <CardHeader>
-                  <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
-                </CardHeader>
-                <CardBody>
-                  <img
-                    src="https://placekitten.com/300/200"
-                    alt="Card Preview"
-                    className="mb-4 rounded-lg"
-                  />
-                  <p className="text-gray-700 text-base">
-                    This is the content of the card body. It can contain text, images,
-                    or any other elements you want to display.
-                  </p>
-                </CardBody>
-                <CardFooter>
-                  <div className="flex justify-between items-center">
-                    <div className="text-sm text-gray-500">Posted on January 1, 2024</div>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                      Read More
-                    </button>
-                  </div>
-                </CardFooter>
-              </Card>
+            <Card width={350}>
+              <CardHeader>
+                <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
+              </CardHeader>
+              <CardBody>
+                <img
+                  src="https://placekitten.com/300/200"
+                  alt="Card Preview"
+                  className="mb-4 rounded-lg"
+                />
+                <p className="text-gray-700 text-base">
+                  This is the content of the card body. It can contain text, images,
+                  or any other elements you want to display.
+                </p>
+              </CardBody>
+              <CardFooter>
+                <div className="flex justify-between items-center">
+                  <div className="text-sm text-gray-500">Posted on January 1, 2024</div>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Read More
+                  </button>
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Botton component</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          To give header and data it will provide features like pagination, selecting a row etc.
+          </p>
+          <div className='my-4'>
+          <Table
+              columns={columns}
+              data={data}
+              showPagination={true}
+              showRowSelection={true}
+              showFilters={true}
+              showSorting={true}
+              defaultPageSize={10}
+              headerBgColor=""
+              defaultColumn={defaultColumn}
+              showColumnFilter={true}
+              filteredColumns={["first_name", "gender"]}
+            />
+          </div>
+        </CardBody>
+      </Card>
+      <Card className="mt-2">
+        <CardHeader>
+          <h2 className="text-xl font-bold text-gray-800">Date picker component</h2>
+        </CardHeader>
+        <CardBody>
+
+          <p className="text-gray-700 text-base">
+          Enables users to select dates from a calendar.
+          </p>
+          <div className='my-4'>
+          <DatePickerComponent
+                dateFormat="dd-MM-yyyy"
+                startDate={dateRange?.length && dateRange[0]}
+                endDate={dateRange?.length && dateRange[1]}
+                onChange={handleDateRangeChange}
+                closeOnSelect={true}
+                isClear={true}
+                monthShown={1}
+                dateBorder="border border-blue-300"
+              />
           </div>
         </CardBody>
       </Card>
