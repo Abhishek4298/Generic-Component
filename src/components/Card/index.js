@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Card = ({ children, width, height, backgroundColor, className }) => {
+const Card = ({ children, width, height, backgroundColor, className,hoverEffect }) => {
   const cardStyles = {
     width: width ? `${width}px` : "auto",
     height: height ? `${height}px` : "auto",
@@ -10,7 +10,7 @@ const Card = ({ children, width, height, backgroundColor, className }) => {
 
 
   return (
-    <div style={cardStyles} className={`rounded overflow-hidden shadow-lg ${className}`}>
+    <div style={cardStyles} className={`${hoverEffect?'transform transition-transform duration-500 hover:scale-110 m-10':''} rounded overflow-hidden shadow-lg ${className}`}>
       {children}
     </div>
   );
@@ -22,6 +22,7 @@ Card.propTypes = {
   height: PropTypes.number,
   backgroundColor: PropTypes.string,
   className: PropTypes.string,
+  hoverEffect: PropTypes.bool
 };
 
 export default Card;
