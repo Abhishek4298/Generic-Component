@@ -14,6 +14,7 @@ import { useMemo } from "react";
 import ColumnFilter from "./components/table/ColumnFilter";
 import DatePickerComponent from "./components/DatePicker";
 import MenuBar from "./components/MenuBar";
+import Presentation from "./components/MenuBar/Presentation";
 
 const CustomRoute = () => {
   //Modal code start
@@ -341,6 +342,10 @@ const CustomRoute = () => {
               />
             </div>
           }
+        />
+        <Route
+        path="/presentation"
+        element={<Presentation/>}
         />
       </Routes>
     </>

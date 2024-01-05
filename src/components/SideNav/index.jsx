@@ -76,6 +76,14 @@ const SideNav = () => {
                Menu Bar
               </Link>
             </li>
+            <li>
+              <Link
+                to="/presentation"
+                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
+              >
+               Presentation
+              </Link>
+            </li>
           </ul>
         </nav>
       </SideNavChildren>
