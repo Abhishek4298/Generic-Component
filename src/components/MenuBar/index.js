@@ -21,31 +21,43 @@ const MenuBar = ({
 }) => {
   const [logoURLPosition, setLogoURLPositon] = useState("");
   const [navItemsPosition, setNavItemsPosition] = useState("");
+  const [selectedItem, setSelectedItem] = useState(0);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  const renderLinkedComponent = () => {
+    if (selectedItem !== null) {
+      return items[selectedItem].linkedComponent;
+    }
+    return null;
+  };
 
   useEffect(() => {
     if (logoPosition && logoPosition === "left") {
-      setLogoURLPositon("justify-start mx-20 pt-5");
+      setLogoURLPositon("justify-start mx-20 pt-5 pb-2");
     } else if (logoPosition && logoPosition === "right") {
-      setLogoURLPositon("justify-end pt-5");
+      setLogoURLPositon("justify-end pt-5 pb-2");
     } else if (logoPosition && logoPosition === "center") {
-      setLogoURLPositon("justify-center pt-5");
+      setLogoURLPositon("justify-center pt-5 pb-2");
     } else if (logoPosition && logoPosition === "sticky") {
       setLogoURLPositon("sticky top-5 mx-20");
     } else {
-      setLogoURLPositon("justify-start mx-20 pt-5");
+      setLogoURLPositon("justify-start mx-20 pt-5 pb-2");
     }
   }, [logoPosition]);
 
   useEffect(() => {
     if (navItemPosition && navItemPosition === "left") {
-      setNavItemsPosition("justify-start");
+      setNavItemsPosition("justify-start pt-6");
     } else if (navItemPosition && navItemPosition === "right") {
-      setNavItemsPosition("justify-end mr-10");
+      setNavItemsPosition("justify-end mr-10 pt-6");
     } else if (navItemPosition && navItemPosition === "center") {
-      setNavItemsPosition("justify-center");
+      setNavItemsPosition("justify-center pt-6");
     } else if (navItemPosition && navItemPosition === "sticky") {
       setNavItemsPosition("sticky top-5 mr-20");
-    }else {
+    } else {
       setNavItemsPosition("justify-between");
     }
   }, [navItemPosition]);
@@ -66,35 +78,46 @@ const MenuBar = ({
     logoURLPosition: tw`${logoURLPosition}` || "justify-start",
   };
 
+  const gridColWisePosition = logoImageURL
+    ? "grid grid-rows-1 grid-flow-col"
+    : "";
+
   return (
-    <nav
-      className={`${menuBarStyle.backgroundColor} ${menuBarStyle.height} ${menuBarStyle.size}`}
-    >
-      <div className={`${menuBarStyle.logoURLPosition} `}>
-        {logoImageURL && (
-          <img
-            src={logoImageURL}
-            alt="Logo Not Found"
-            className={`${menuBarStyle.imageHeight} ${menuBarStyle.imageWidth} rounded-2xl`}
-          />
-        )}
-      </div>
-      <div className={`flex ${menuBarStyle.navItemPosition}`}>
-        <ul className={`flex ${menuBarStyle.spaceNavItems}`}>
-          {items.map((item, index) => (
-            <li key={index}>
-              <Link
-                to={`${basePath}${item.link}`}
-                className={`${menuBarStyle.color} ${menuBarStyle.itemsLinkHoverColor}`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      
-    </nav>
+    <>
+      <nav
+        className={`${menuBarStyle.backgroundColor} ${menuBarStyle.height} ${menuBarStyle.size}`}
+      >
+        <div className={`${gridColWisePosition}`}>
+          {logoImageURL && (
+            <div className={`flex ${menuBarStyle.logoURLPosition} `}>
+              <img
+                src={logoImageURL}
+                alt="Logo Not Found"
+                className={`${menuBarStyle.imageHeight} ${menuBarStyle.imageWidth} rounded-2xl`}
+              />
+            </div>
+          )}
+          <div>
+            <ul
+              className={`flex ${menuBarStyle.spaceNavItems} ${menuBarStyle.navItemPosition}`}
+            >
+              {items.map((item, index) => (
+                <li key={index}>
+                  <Link
+                    to={`${basePath}${item.link}`}
+                    className={`${menuBarStyle.color} ${menuBarStyle.itemsLinkHoverColor}`}
+                    onClick={() => handleItemClick(index)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      {renderLinkedComponent()}
+    </>
   );
 };
 
