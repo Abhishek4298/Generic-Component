@@ -14,6 +14,59 @@ const CustomRoute = () => {
     alert(`Button clicked with data: ${data}`);
   };
 
+  const fields = [
+    { name: 'name', label: 'Name', type: 'text', placeholder: 'Enter your name' },
+    { name: 'email', label: 'Email', type: 'email', placeholder: 'Enter your email' },
+    { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password' },
+    { name: 'phone', label: 'Phone', type: 'text', placeholder: 'Enter your phone number' },
+    { name: 'message', label: 'Message', type: 'textarea', placeholder: 'Enter your message' },
+    {
+      name: 'radio',
+      label: 'Radio',
+      type: 'radio',
+      options: [
+        { value: 'male', label: 'Male' },
+        { value: 'female', label: 'Female' },
+        { value: 'others', label: 'Others' },
+      ],
+    },
+    {
+      name: 'dropdown',
+      label: 'City',
+      type: 'dropdown',
+      options: [
+        { value: 'ranchi', label: 'Ranchi' },
+        { value: 'jamshedpur', label: 'Jamshedpur' },
+        { value: 'varanasi', label: 'Varanasi' },
+      ],
+    },
+    {
+      name: 'hobbies',
+      label: 'Hobbies',
+      type: 'checkbox',
+      options: [
+        { value: 'reading', label: 'Reading' },
+        { value: 'traveling', label: 'Traveling' },
+        { value: 'coding', label: 'Coding' },
+      ],
+    },
+    {
+      name: 'acceptTerms',
+      label: 'Accept Terms & Conditions',
+      type: 'checkbox',
+      options: [
+        { value: 'acceptTerms', label: 'I accept the terms and conditions' },
+      ],
+    },
+    // { name: 'checkbox',
+    //   label: 'Accept Terms & Conditions', 
+    //   type: 'checkbox', 
+    //   options:[
+    //     { value:'acceptterms', label:''}
+    //   ],
+    // }
+  ];
+
   return (
     <>
       <Routes>
@@ -90,44 +143,8 @@ const CustomRoute = () => {
           path="/input"
           element={
             <div>
-              <InputFormControllers
-                className="p-3 ml-3 text-lg"
-                boxPosition='justify-center'
-                labelColor='text-green-500'
-                label="Your Name"
-                name="username"
-                type="text"
-                placeholder="Enter Your Name"
-                minLength={3}
-                maxLength={20}
-              />
-              <InputFormControllers
-                className="p-3 ml-3 mx-auto text-lg"
-                boxPosition='justify-center'
-                label="Your Age"
-                name="age"
-                type="number"
-                placeholder="Enter Your Age"
-              />
-              <InputFormControllers
-                className="p-3 ml-3 text-lg"
-                boxPosition='justify-center'
-                label="Your Email"
-                name="email"
-                type="email"
-                placeholder="Enter Your Email"
-                minLength={3}
-                maxLength={50}
-              />
-              <InputFormControllers
-                className="p-3 ml-3 text-lg"
-                boxPosition='justify-center'
-                label="Your Password"
-                name="password"
-                type="password"
-                placeholder="Enter Your Password"
-                minLength={8}
-                maxLength={12}
+              <InputFormControllers 
+              fields={fields}
               />
             </div>
           }

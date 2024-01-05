@@ -1,106 +1,129 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-const InputFormControllers = ({
-  label,
-  name,
-  type,
-  placeholder,
-  className,
-  minLength,
-  maxLength,
-  boxPosition,
-  labelColor,
-  ...rest
-}) => {
-  const formik = useFormik({
-    initialValues: {
-      [name]: "",
-    },
-    validate: (values) => {
-      const errors = {};
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Name is required")
+    .min(3, "Name must be more than 3 characters")
+    .max(20, "It must not be more than 20"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .matches(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
+      "Password must be at least 8 characters, must contain at least one uppercase letter, must contain at least one lowercase letter, must contain at least one digit, must contain at least one special character"
+    )
+    .required("Password is required"),
+  phone: Yup.string()
+    .matches(/^[0-9]+$/, "Must be only digits")
+    .min(10, "Must be exactly 10 digits")
+    .max(10, "Must be exactly 10 digits")
+    .required("Phone number is required"),
+  message: Yup.string().required("Message is required"),
+  acceptTerms: Yup.array().of(Yup.string()).min(1, "You must accept the terms and conditions").required("You must accept the terms and conditions"),
+  radio: Yup.string().required("Please select one option"),
+  dropdown: Yup.string().required("Please select an option"),
+  hobbies: Yup.array()
+    .of(Yup.string())
+    .min(1, "At least one hobby must be checked")
+    .required("At least one hobby must be checked"),
+});
 
-      if (minLength && values[name].length < minLength) {
-        errors[name] = `${label} must be at least ${minLength} characters`;
-      }
-
-      if (maxLength && values[name].length > maxLength) {
-        errors[name] = `${label} must be at most ${maxLength} characters`;
-      }
-
-      switch (type) {
-        case "email":
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values[name])) {
-            errors[name] = "Invalid email address";
-          }
-          break;
-          case "password":
-           
-            if (values[name].length < 8) {
-              errors[name] = "Password must be at least 8 characters";
-            }
-            
-            else if (!/[A-Z]/.test(values[name])) {
-              errors[name] = "Password must contain at least one uppercase letter";
-            }
-            
-            else if (!/[a-z]/.test(values[name])) {
-              errors[name] = "Password must contain at least one lowercase letter";
-            }
-          
-            else if (!/\d/.test(values[name])) {
-              errors[name] = "Password must contain at least one digit";
-            }
-            
-            else if (!/[!@#$%^&*(),.?":{}|<>]/.test(values[name])) {
-              errors[name] = "Password must contain at least one special character";
-            }
-            break;
-        
-        default:
-          break;
-      }
-
-      return errors;
-    },
-  });
-  
-  const containerClasses = `flex mb-4 mt-10 ${className} ${boxPosition}`;
-  const labelClasses = `text-gray-700 mt-2 text-sm font-bold mr-3 ${labelColor}`;
-  const inputClasses = `${
-    formik.touched[name] && formik.errors[name]
-      ? "border-red-500"
-      : "border-gray-300"
-  } appearance-none block w-4/12 bg-white border ${
-    formik.touched[name] && formik.errors[name]
-      ? "text-red-500"
-      : "text-gray-700"
-  } rounded-md py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200`;
+const InputFormControllers = ({ fields }) => {
+  const initialValues = fields.reduce((acc, field) => {
+    acc[field.name] = field.type === "checkbox" ? [] : "";
+    return acc;
+  }, {});
 
   return (
-    <div>
-      <div className={containerClasses}>
-        <label htmlFor={name} className={labelClasses}>
-          {label}
-        </label>
-        <input
-          type={type}
-          id={name}
-          name={name}
-          placeholder={placeholder}
-          onChange={formik.handleChange}
-          onBlur={() => formik.setFieldTouched(name, true)}
-          value={formik.values[name]}
-          className={inputClasses}
-          {...rest}
-        />
-      </div>
-      <div className={`flex ${boxPosition}`}>
-        {formik.touched[name] && formik.errors[name] && (
-          <div className="text-red-500 text-xs mt-1">{formik.errors[name]}</div>
-        )}
-      </div>
-    </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        console.log(values);
+        alert(JSON.stringify(values, null, 2));
+      }}
+    >
+      <Form className="max-w-md mx-auto my-8">
+        {fields.map((field) => (
+          <div key={field.name} className="mb-4">
+            <label
+              htmlFor={field.name}
+              className="block text-sm font-medium text-gray-600"
+            >
+              {field.label}
+            </label>
+            {field.type === "textarea" ? (
+              <Field
+                as="textarea"
+                name={field.name}
+                placeholder={field.placeholder}
+                className="mt-1 p-2 block w-full border rounded-md"
+              />
+            ) : field.type === "checkbox" ? (
+              <div>
+                {field.options.map((option) => (
+                  <div key={option.value} className="flex items-center">
+                    <Field
+                      type="checkbox"
+                      name={field.name}
+                      value={option.value}
+                      className="mr-1"
+                    />
+                    <label className="text-sm">{option.label}</label>
+                  </div>
+                ))}
+              </div>
+            ) : field.type === "radio" ? (
+              <div className="flex space-x-2">
+                {field.options.map((option) => (
+                  <div key={option.value} className="flex items-center">
+                    <Field
+                      type="radio"
+                      name={field.name}
+                      value={option.value}
+                      className="mr-1"
+                    />
+                    <label className="text-sm">{option.label}</label>
+                  </div>
+                ))}
+              </div>
+            ) : field.type === "dropdown" ? (
+              <Field
+                as="select"
+                name={field.name}
+                className="mt-1 p-2 block w-full border rounded-md"
+              >
+                <option value="">Select...</option>
+                {field.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+            ) : (
+              <Field
+                type={field.type}
+                name={field.name}
+                placeholder={field.placeholder}
+                className="mt-1 p-2 block w-full border rounded-md"
+              />
+            )}
+            <ErrorMessage
+              name={field.name}
+              component="div"
+              className="text-red-500 text-sm"
+            />
+          </div>
+        ))}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        >
+          Submit
+        </button>
+      </Form>
+    </Formik>
   );
 };
 
