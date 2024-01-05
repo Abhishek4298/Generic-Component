@@ -405,7 +405,6 @@ const CustomRoute = () => {
                 backgroundColor="blue"
                 textColor="white"
                 textSize="2xl"
-                fontFamily="serif"
                 navHeight="24"
                 logoImageURL="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
                 basePath="/menu"

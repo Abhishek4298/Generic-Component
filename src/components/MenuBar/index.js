@@ -18,6 +18,7 @@ const MenuBar = ({
   itemsLinkHoverColorStrength,
   navItemPosition,
   logoPosition,
+  className
 }) => {
   const [logoURLPosition, setLogoURLPositon] = useState("");
   const [navItemsPosition, setNavItemsPosition] = useState("");
@@ -66,7 +67,6 @@ const MenuBar = ({
     backgroundColor: tw`bg-${backgroundColor}-500` || "bg-gray-800",
     color: tw`text-${textColor}` || "text-white",
     size: tw`text-${textSize}` || "text-md",
-    fontFamily: tw`font-${fontFamily}` || "font-sans",
     height: tw`h-${navHeight}` || "h-16",
     imageHeight: tw`h-${imageHeight}` || "h-20",
     imageWidth: tw`w-${imageWidth}` || "w-24",
@@ -76,6 +76,7 @@ const MenuBar = ({
       "hover:text-gray-300",
     navItemPosition: tw`${navItemsPosition}` || "justify-between",
     logoURLPosition: tw`${logoURLPosition}` || "justify-start",
+    className: tw`${className}` || ""
   };
 
   const gridColWisePosition = logoImageURL
@@ -85,11 +86,11 @@ const MenuBar = ({
   return (
     <>
       <nav
-        className={`${menuBarStyle.backgroundColor} ${menuBarStyle.height} ${menuBarStyle.size}`}
+        className={`${menuBarStyle.backgroundColor} ${menuBarStyle.height} ${menuBarStyle.size} ${menuBarStyle.className}`}
       >
         <div className={`${gridColWisePosition}`}>
           {logoImageURL && (
-            <div className={`flex ${menuBarStyle.logoURLPosition} `}>
+            <div className={`flex ${menuBarStyle.logoURLPosition} items-center `}>
               <img
                 src={logoImageURL}
                 alt="Logo Not Found"
@@ -99,7 +100,7 @@ const MenuBar = ({
           )}
           <div>
             <ul
-              className={`flex ${menuBarStyle.spaceNavItems} ${menuBarStyle.navItemPosition}`}
+              className={`flex ${menuBarStyle.spaceNavItems} ${menuBarStyle.navItemPosition} items-center`}
             >
               {items.map((item, index) => (
                 <li key={index}>
