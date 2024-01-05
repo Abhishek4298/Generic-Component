@@ -1,6 +1,6 @@
 {
-  "name": "ex-generic-component-library",
-  "version": "0.1.2",
+  "name": "excelra-react-generic-ui",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
