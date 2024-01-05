@@ -1,43 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { defaultImageUrl } from "../../constant";
 
-const Card = ({ title, content, imageUrl, onClick }) => {
+const Card = ({ children, width, height, backgroundColor, className,hoverEffect }) => {
+  const cardStyles = {
+    width: width ? `${width}px` : "auto",
+    height: height ? `${height}px` : "auto",
+    backgroundColor: backgroundColor || "white",
+  };
+
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt="Card"
-          className="w-full h-64"
-          onError={(e) => (e.target.src = defaultImageUrl)}
-        />
-      ) : (
-        <img src={defaultImageUrl} alt="No Preview" className="w-full" />
-      )}
-      <div className="px-6 py-4">
-        {title && <div className="font-bold text-xl mb-2">{title}</div>}
-        {content && <p className="text-gray-700 text-base">{content}</p>}
-      </div>
-      {onClick && (
-        <div className="px-6 py-4">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={onClick}
-          >
-            Click me
-          </button>
-        </div>
-      )}
+    <div style={cardStyles} className={`${hoverEffect?'transform transition-transform duration-200 hover:scale-110':''} rounded overflow-hidden shadow-lg ${className}`}>
+      {children}
     </div>
   );
 };
 
 Card.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  imageUrl: PropTypes.string,
-  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  className: PropTypes.string,
+  hoverEffect: PropTypes.bool
 };
 
 export default Card;
