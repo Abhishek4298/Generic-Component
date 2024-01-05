@@ -25,6 +25,14 @@ const SideNav = () => {
           <ul className="space-y-4 mt-24">
             <li>
               <Link
+                to="/presentation"
+                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
+              >
+                Presentation
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/button"
                 className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
               >
@@ -73,15 +81,15 @@ const SideNav = () => {
                 to="/menu"
                 className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
               >
-               Menu Bar
+                Menu Bar
               </Link>
             </li>
             <li>
               <Link
-                to="/presentation"
+                to="/carousel"
                 className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
               >
-               Presentation
+                Carousel
               </Link>
             </li>
           </ul>
