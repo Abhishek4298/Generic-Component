@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
 
 const DatePickerComponent = ({
+  dateLabel,
+  rangeDateLabel,
   dateFormat,
   selectedDate,
   onChange,
@@ -33,18 +35,18 @@ const DatePickerComponent = ({
     if (!displayedDate) {
       let displayedDateText = "";
       if (dateRange[0] && dateRange[1] && dateSelected) {
-        displayedDateText = `Birth Date: ${dateSelected.toLocaleDateString(
+        displayedDateText = `${dateLabel} ${dateSelected.toLocaleDateString(
           "en-GB"
         )}
-        Selected Date Range: ${dateRange[0].toLocaleDateString(
+        ${rangeDateLabel} ${dateRange[0].toLocaleDateString(
           "en-GB"
         )} to ${dateRange[1].toLocaleDateString("en-GB")}`;
       } else if (dateRange[0] && dateRange[1]) {
-        displayedDateText = `Selected Date Range: ${dateRange[0].toLocaleDateString(
+        displayedDateText = `${rangeDateLabel} ${dateRange[0].toLocaleDateString(
           "en-GB"
         )} to ${dateRange[1].toLocaleDateString()}`;
       } else if (dateSelected) {
-        displayedDateText = `Selected Date: ${dateSelected.toLocaleDateString(
+        displayedDateText = `${dateLabel} ${dateSelected.toLocaleDateString(
           "en-GB"
         )}`;
       } else {
@@ -62,7 +64,7 @@ const DatePickerComponent = ({
   return (
     <>
       <div className="relative flex justify-center items-center">
-        <h1 className="m-6">Birth Date</h1>
+        <h1 className="m-6">{dateLabel}</h1>
         <DatePicker
           selected={dateSelected}
           onChange={handleDateChange}
@@ -76,7 +78,7 @@ const DatePickerComponent = ({
         />
       </div>
       <div className="relative flex justify-center items-center">
-        <h1 className="m-5">Start Date</h1>
+        <h1 className="m-5">{rangeDateLabel[0]}</h1>
         <DatePicker
           selected={dateRange[0]}
           onChange={(date) => handleRangeDateChange([date, dateRange[1]])}
@@ -92,7 +94,7 @@ const DatePickerComponent = ({
           monthsShown={monthShown}
           className={`w-full p-2 ${dateBorder} rounded-md cursor-pointer`}
         />
-        <h1 className="m-5">End Date</h1>
+        <h1 className="m-5">{rangeDateLabel[1]}</h1>
         <DatePicker
           selected={dateRange[1]}
           onChange={(date) => handleRangeDateChange([dateRange[0], date])}

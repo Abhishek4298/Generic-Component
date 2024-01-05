@@ -14,10 +14,6 @@ import { useMemo } from "react";
 import ColumnFilter from "./components/table/ColumnFilter";
 import DatePickerComponent from "./components/DatePicker";
 import MenuBar from "./components/MenuBar";
-import About from "./components/MenuBar/About";
-import Contact from "./components/MenuBar/Contact";
-import Home from "./components/MenuBar/Home";
-import Music from "./components/MenuBar/Music";
 
 const CustomRoute = () => {
   //Modal code start
@@ -64,10 +60,42 @@ const CustomRoute = () => {
   };
 
   const menuItems = [
-    { label: "🏠Home", link: "/", linkedComponent: Home },
-    { label: "🅰️bout", link: "/about", linkedComponent: About },
-    { label: "🎵 Music", link: "/music", linkedComponent: Music },
-    { label: "📞Contact", link: "/contact", linkedComponent: Contact },
+    {
+      label: "Home",
+      link: "/",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 italic">
+          <h1>This is Home component</h1>
+        </div>
+      ),
+    },
+    {
+      label: "About",
+      link: "/about",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 font-thin">
+          <h1>This is About component</h1>
+        </div>
+      ),
+    },
+    {
+      label: "Music",
+      link: "/music",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 font-semibold">
+          <h1>This is Music component</h1>
+        </div>
+      ),
+    },
+    {
+      label: "Contact",
+      link: "/contact",
+      linkedComponent: (
+        <div className="flex justify-center text-8xl text-red-600 mt-12 font-bold">
+          <h1>This is Contact component</h1>
+        </div>
+      ),
+    },
   ];
 
 
@@ -275,15 +303,9 @@ const CustomRoute = () => {
           path="/datepicker"
           element={
             <>
-              {/* <DatePickerComponent
-                selectedDate={selectedDate}
-                onChange={handleDateChange}
-                closeOnSelect={true}
-                isClear={true}
-                monthShown={1}
-                dateBorder="border border-gray-300"
-              /> */}
               <DatePickerComponent
+                dateLabel="Birth Date"
+                rangeDateLabel={["Start Date", "End Date"]}
                 dateFormat="dd-MM-yyyy"
                 startDate={dateRange?.length && dateRange[0]}
                 endDate={dateRange?.length && dateRange[1]}
@@ -302,23 +324,21 @@ const CustomRoute = () => {
             <div>
               <MenuBar
                 items={menuItems}
-                backgroundColor="bg-pink-500"
-                textColor="text-white"
-                textSize="text-2xl"
-                font="font-serif"
-                height="h-25"
-                image="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+                backgroundColor="blue"
+                textColor="white"
+                textSize="2xl"
+                fontFamily="serif"
+                navHeight="24"
+                logoImageURL="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
                 basePath="/menu"
+                imageHeight="16"
+                imageWidth= "20"
+                spaceNavItems="5"
+                itemsLinkHoverColor = "gray" 
+                itemsLinkHoverColorStrength = "800"
+                navItemPosition = "right"
+                logoPosition = "left"
               />
-              <Routes>
-                {menuItems.map((menu) => (
-                  <Route
-                    key={menu.link}
-                    path={menu.link}
-                    element={<menu.linkedComponent />}
-                  />
-                ))}
-              </Routes>
             </div>
           }
         />
