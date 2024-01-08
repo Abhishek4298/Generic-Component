@@ -523,19 +523,26 @@ const Presentation = () => {
           <p className="text-gray-700 text-base">
             <MenuBar
               items={menuItems}
-              backgroundColor="blue"
+              color="red"
+              colorStrength="800"
               textColor="white"
-              textSize="2xl"
-              fontFamily="serif"
-              // navHeight="30"
+              textSize="22"
+              navHeight="100"
+              //logoImageURL="Logo"
               logoImageURL="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+              logoTextSize="80"
+              logoTextColor="yellow"
+              logoTextColorStrength="300"
+              logoClassName="font-semibold"
               basePath="/menu"
-              imageHeight="36"
+              imageHeight="80"
+              imageWidth="80"
               spaceNavItems="5"
               itemsLinkHoverColor="gray"
               itemsLinkHoverColorStrength="800"
               navItemPosition="right"
               logoPosition="left"
+              className="font-serif"
             />
           </p>
         </CardBody>
@@ -699,20 +706,20 @@ const Presentation = () => {
                 timeInterval={3}
               />
             </div>
-              <h4 className="font-bold text-xl underline mb-3">
-                Code require to make the Generic Carousel Component.
-              </h4>
-              <pre className="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
-                <code>
-                  {`
+            <h4 className="font-bold text-xl underline mb-3">
+              Code require to make the Generic Carousel Component.
+            </h4>
+            <pre className="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+              <code>
+                {`
               <Carousel
                  images={carouselImages}
                  height={400}
                  width="100%"
                  timeInterval={3}
                />   `}
-                </code>
-              </pre>
+              </code>
+            </pre>
           </div>
         </CardBody>
       </Card>

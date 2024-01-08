@@ -4,7 +4,8 @@ import { tw } from "@twind/react";
 
 const MenuBar = ({
   items,
-  color="blue",
+  color="gray",
+  colorStrength="500",
   textColor="white",
   textSize="22",
   navHeight="100",
@@ -67,7 +68,7 @@ const MenuBar = ({
   }, [navItemPosition]);
 
   const menuBarStyle = {
-    backgroundColor: tw`bg-${color}-500` || "bg-gray-800",
+    backgroundColor: tw`bg-${color}-${colorStrength}` || "bg-gray-500",
     color: tw`text-${textColor}` || "text-white",
     size: tw`text-[${textSize}px]` || "text-md",
     height: tw`h-[${navHeight}px]` || "h-16",
