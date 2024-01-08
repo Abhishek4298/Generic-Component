@@ -276,11 +276,11 @@ const CustomRoute = () => {
         <Route
           path="/card"
           element={
-            <div className="flex">
-              <Card>
+            <div className="flex mt-20">
+              <Card width={400}>
                 <CardHeader>
                   <h2 className="text-xl font-bold text-gray-800">
-                    Card Title
+                    Card Cat Title
                   </h2>
                 </CardHeader>
                 <CardBody>
@@ -305,12 +305,34 @@ const CustomRoute = () => {
                   </div>
                 </CardFooter>
               </Card>
-
-              <Card
-                title="Example Card"
-                content="This is a generic card component."
-                onClick={() => alert("Button clicked!")}
-              />
+              <Card width={400} hoverEffect={true} className="mx-14">
+                <CardHeader>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    Card Cat Title
+                  </h2>
+                </CardHeader>
+                <CardBody>
+                  <img
+                    src="https://placekitten.com/300/200"
+                    alt="Card Preview"
+                    className="mb-4 rounded-lg"
+                  />
+                  <p className="text-gray-700 text-base">
+                    This is the content of the card body. It can contain text,
+                    images, or any other elements you want to display.
+                  </p>
+                </CardBody>
+                <CardFooter>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-gray-500">
+                      Posted on January 1, 2024
+                    </div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Read More
+                    </button>
+                  </div>
+                </CardFooter>
+              </Card>
             </div>
           }
         />
@@ -325,7 +347,7 @@ const CustomRoute = () => {
               showFilters={true}
               showSorting={true}
               defaultPageSize={10}
-              headerBgColor=""
+              headerBgColor="gray"
               defaultColumn={defaultColumn}
               showColumnFilter={true}
               filteredColumns={["first_name", "gender"]}
@@ -357,19 +379,25 @@ const CustomRoute = () => {
             <div>
               <MenuBar
                 items={menuItems}
-                backgroundColor="blue"
+                color="blue"
                 textColor="white"
-                textSize="2xl"
-                navHeight="24"
+                textSize="22"
+                navHeight="100"
+                //logoImageURL="Logo"
                 logoImageURL="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+                logoTextSize="80"
+                logoTextColor="yellow"
+                logoTextColorStrength="300"
+                logoClassName="font-semibold"
                 basePath="/menu"
-                imageHeight="16"
-                imageWidth="20"
+                imageHeight="80"
+                imageWidth="80"
                 spaceNavItems="5"
                 itemsLinkHoverColor="gray"
                 itemsLinkHoverColorStrength="800"
                 navItemPosition="right"
                 logoPosition="left"
+                className="font-serif"
               />
             </div>
           }

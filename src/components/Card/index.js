@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Card = ({ children, width, height, backgroundColor, className,hoverEffect }) => {
+const Card = ({ children, width, height, backgroundColor, className,hoverEffect=false }) => {
   const cardStyles = {
     width: width ? `${width}px` : "auto",
     height: height ? `${height}px` : "auto",
