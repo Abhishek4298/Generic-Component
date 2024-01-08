@@ -426,11 +426,20 @@ const CustomRoute = () => {
             <div className="h-full">
               <Carousel images={carouselImages} height={400} width="100%" />
               <hr className="h-px my-3 bg-gray-100 border-0 dark:bg-gray-300" />
+              <h2>Carousel With TimeInterval props passed</h2>
               <Carousel
                 images={carouselImages}
                 height={400}
                 width="100%"
                 timeInterval={2}
+              />
+              <hr className="h-px my-3 bg-gray-100 border-0 dark:bg-gray-300" />
+              <h2>Carousel Without navigationDots props</h2>
+              <Carousel
+                images={carouselImages}
+                height={400}
+                width="100%"
+                navigationDots={false}
               />
             </div>
           }
