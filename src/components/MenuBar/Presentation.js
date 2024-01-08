@@ -4,7 +4,7 @@ import MenuBar from "../MenuBar";
 import Card from "../Card";
 import CardHeader from "../Card/CardHeader";
 import CardBody from "../Card/CardBody";
-import { trueIcon } from "../../constant";
+import { carouselImages, trueIcon } from "../../constant";
 import Button from "../Button";
 import Modal from "../Modal";
 import COLUMNS from "../table/COLUMNS";
@@ -12,6 +12,7 @@ import Data from "../table/data.json";
 import Table from "../table";
 import ColumnFilter from "../table/ColumnFilter";
 import DatePickerComponent from "../DatePicker";
+import Carousel from "../Carousel";
 
 const Presentation = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +76,6 @@ const Presentation = () => {
     setIsModalOpen(false);
   };
   const handleDateRangeChange = (dates) => {
-    console.log("Selected Date Range:", dates);
     setDateRange(dates);
   };
   return (
@@ -492,7 +492,9 @@ const Presentation = () => {
         </CardHeader>
         <CardBody>
           <p className="text-gray-700 text-base">
-            Enables users to select dates from a calendar. Either users can only select date like Birth Date or they can use date range like start & end date.
+            Enables users to select dates from a calendar. Either users can only
+            select date like Birth Date or they can use date range like start &
+            end date.
           </p>
           <div className="my-4 h-96">
             <DatePickerComponent
@@ -689,7 +691,30 @@ const Presentation = () => {
           <p className="text-gray-700 text-base">
             Displays a rotating set of images or content.
           </p>
-          <div className="my-4">Inprogress...</div>
+          <div>
+            <div className="mb-4">
+              <Carousel
+                images={carouselImages}
+                height={400}
+                width="100%"
+                timeInterval={3}
+              />
+            </div>
+              <h4 className="font-bold text-xl underline mb-3">
+                Code require to make the Generic Carousel Component.
+              </h4>
+              <pre className="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+                <code>
+                  {`
+              <Carousel
+                 images={carouselImages}
+                 height={400}
+                 width="100%"
+                 timeInterval={3}
+               />   `}
+                </code>
+              </pre>
+          </div>
         </CardBody>
       </Card>
       <Card className="mt-2">
