@@ -274,11 +274,11 @@ const CustomRoute = () => {
               <InputFormControllers
                 fields={fields}
                 validationSchema={generateValidationSchema(fields)}
-                errorTextColor="blue"
+                errorTextColor="red"
                 errorTextSize="16"
                 errorTextColorStrength="700"
                 labelTextSize="22"
-                labelTextColor="green"
+                labelTextColor="black"
                 labelTextColorStrength="500"
                 labelClassName="mt-4"
                 fieldClassName="p-3"
