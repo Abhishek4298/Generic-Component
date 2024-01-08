@@ -3,7 +3,7 @@ import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
-import { trueIcon } from "./constant";
+import { menuItems, trueIcon } from "./constant";
 import CardBody from "./components/Card/CardBody";
 import CardHeader from "./components/Card/CardHeader";
 import CardFooter from "./components/Card/CardFooter";
@@ -51,54 +51,9 @@ const CustomRoute = () => {
     alert(`Button clicked with data: ${data}`);
   };
 
-  // const handleDateChange = (date) => {
-  //   console.log("Selected Date:", date);
-  //   setSelectedDate(date);
-  // };
-
   const handleDateRangeChange = (dates) => {
-    console.log("Selected Date Range:", dates);
     setDateRange(dates);
   };
-
-  const menuItems = [
-    {
-      label: "Home",
-      link: "/",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 italic">
-          <h1>This is Home component</h1>
-        </div>
-      ),
-    },
-    {
-      label: "About",
-      link: "/about",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 font-thin">
-          <h1>This is About component</h1>
-        </div>
-      ),
-    },
-    {
-      label: "Music",
-      link: "/music",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 font-semibold">
-          <h1>This is Music component</h1>
-        </div>
-      ),
-    },
-    {
-      label: "Contact",
-      link: "/contact",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 font-bold">
-          <h1>This is Contact component</h1>
-        </div>
-      ),
-    },
-  ];
 
   return (
     <>
@@ -317,7 +272,7 @@ const CustomRoute = () => {
             </div>
           }
         />
-        {/*  Modal code end */}
+        {/*  Card code start */}
         <Route
           path="/card"
           element={

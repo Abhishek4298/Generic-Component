@@ -76,7 +76,6 @@ const Presentation = () => {
     setIsModalOpen(false);
   };
   const handleDateRangeChange = (dates) => {
-    console.log("Selected Date Range:", dates);
     setDateRange(dates);
   };
   return (

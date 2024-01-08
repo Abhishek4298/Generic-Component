@@ -4,8 +4,8 @@ import SideNavChildren from "./SideNavChildren";
 import { sideNavIcon } from "../../constant";
 import backIcon from "../../assets/images/previous.png";
 
-const SideNav = () => {
-  const [isNavOpen, setNavOpen] = useState(false);
+const SideNav = ({ navItem, isSideNavOpen = false }) => {
+  const [isNavOpen, setNavOpen] = useState(isSideNavOpen);
 
   const toggleNav = () => {
     setNavOpen(!isNavOpen);
@@ -23,75 +23,19 @@ const SideNav = () => {
       <SideNavChildren isOpen={isNavOpen}>
         <nav>
           <ul className="space-y-4 mt-24">
-            <li>
-              <Link
-                to="/presentation"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Presentation
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/button"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Button
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/modal"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                {/* <svg
-                  className="w-6 h-6 mr-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                ></svg> */}
-                Modal
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/card"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Card
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/table"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Table
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/datepicker"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Date Picker
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/menu"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Menu Bar
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/carousel"
-                className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
-              >
-                Carousel
-              </Link>
-            </li>
+            {navItem?.length &&
+              navItem.map((nav) => {
+                return (
+                  <li key={nav?.label}>
+                    <Link
+                      to={nav?.link}
+                      className="text-lg text-white hover:text-blue-300 focus:text-blue-300 px-4 py-2 flex items-center transition-colors duration-150 ease-in-out"
+                    >
+                      {nav?.label}
+                    </Link>
+                  </li>
+                );
+              })}
           </ul>
         </nav>
       </SideNavChildren>
@@ -99,8 +43,7 @@ const SideNav = () => {
       <div className="fixed top-5 left-5 z-30">
         <div
           onClick={toggleNav}
-          className="cursor-pointer"
-          // className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           {isNavOpen ? (
             <h2 className="z-5 text-white">

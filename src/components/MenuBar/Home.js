@@ -75,9 +75,9 @@ const Home = () => {
     setIsModalOpen(false);
   };
   const handleDateRangeChange = (dates) => {
-    console.log("Selected Date Range:", dates);
     setDateRange(dates);
   };
+
   return (
     <div className="bg-gray-100 min-h-screen p-8 mt-20">
       <Card className="mt-2">
