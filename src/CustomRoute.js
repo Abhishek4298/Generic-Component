@@ -16,6 +16,7 @@ import DatePickerComponent from "./components/DatePicker";
 import MenuBar from "./components/MenuBar";
 import Presentation from "./components/MenuBar/Presentation";
 
+
 const CustomRoute = () => {
   //Modal code start
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -191,56 +192,129 @@ const CustomRoute = () => {
           path="/modal"
           element={
             <div className="flex justify-center items-center h-screen">
-              <button onClick={() => openModal(1)} className="bg-blue-500 text-white px-4 py-2 m-2">
+              <button
+                onClick={() => openModal(1)}
+                className="bg-blue-500 text-white px-4 py-2 m-2"
+              >
                 Center Modal
               </button>
-              <button onClick={() => openModal(2)} className="bg-blue-500 text-white px-4 py-2 m-2">
+              <button
+                onClick={() => openModal(2)}
+                className="bg-blue-500 text-white px-4 py-2 m-2"
+              >
                 Top Modal
               </button>
-              <button onClick={() => openModal(3)} className="bg-blue-500 text-white px-4 py-2 m-2">
+              <button
+                onClick={() => openModal(3)}
+                className="bg-blue-500 text-white px-4 py-2 m-2"
+              >
                 Bottom Modal
               </button>
-              {modalType === 1 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} modalWidth={400} position="center">
-                <div>
-                  <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
-                      Terms of Service
-                    </h3>
+              {modalType === 1 && (
+                <Modal
+                  isOpen={isModalOpen}
+                  onClose={closeModal}
+                  showCloseIcon={true}
+                  modalWidth={400}
+                  position="center"
+                >
+                  <div>
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                        Terms of Service
+                      </h3>
+                    </div>
+                    <div class="p-4 md:p-5 space-y-4">
+                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        With less than a month to go before the European Union
+                        enacts new consumer privacy laws for its citizens,
+                        companies around the world are updating their terms of
+                        service agreements to comply.
+                      </p>
+                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        The European Union’s General Data Protection Regulation
+                        (G.D.P.R.) goes into effect on May 25 and is meant to
+                        ensure a common set of data rights in the European
+                        Union. It requires organizations to notify users as soon
+                        as possible of high-risk data breaches that could
+                        personally affect them.
+                      </p>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        I accept
+                      </button>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                      >
+                        Decline
+                      </button>
+                    </div>
                   </div>
-                  <div class="p-4 md:p-5 space-y-4">
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                      With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                </Modal>
+              )}
+              {modalType === 2 && (
+                <Modal
+                  isOpen={isModalOpen}
+                  onClose={closeModal}
+                  showCloseIcon={true}
+                  header="Modal Header"
+                  content="Modal Body"
+                  modalWidth={400}
+                  position="top"
+                >
+                  <div>
+                    <p class="text-gray-700 my-2">
+                      With less than a month to go before the European Union
+                      enacts new consumer privacy laws for its citizens,
+                      companies around the world are updating their terms of
+                      service agreements to comply.
                     </p>
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                      The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                    <p class="text-gray-700 my-2">
+                      The European Union’s General Data Protection Regulation
+                      (G.D.P.R.) goes into effect on May 25 and is meant to
+                      ensure a common set of data rights in the European Union.
+                      It requires organizations to notify users as soon as
+                      possible of high-risk data breaches that could personally
+                      affect them
                     </p>
                   </div>
-                  <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                    <button data-modal-hide="default-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                </Modal>
+              )}
+              {modalType === 3 && (
+                <Modal
+                  isOpen={isModalOpen}
+                  onClose={closeModal}
+                  showCloseIcon={true}
+                  header="Modal Header"
+                  content="Modal Body"
+                  modalWidth={400}
+                  position="bottom"
+                >
+                  <div>
+                    <p class="text-gray-700 my-2">
+                      With less than a month to go before the European Union
+                      enacts new consumer privacy laws for its citizens,
+                      companies around the world are updating their terms of
+                      service agreements to comply.
+                    </p>
+                    <p class="text-gray-700 my-2">
+                      The European Union’s General Data Protection Regulation
+                      (G.D.P.R.) goes into effect on May 25 and is meant to
+                      ensure a common set of data rights in the European Union.
+                      It requires organizations to notify users as soon as
+                      possible of high-risk data breaches that could personally
+                      affect them
+                    </p>
                   </div>
-                </div>
-              </Modal>}
-              {modalType === 2 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="top">
-                <div>
-                  <p class="text-gray-700 my-2">
-                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                  </p>
-                  <p class="text-gray-700 my-2">
-                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
-                  </p>
-                </div>
-              </Modal>}
-              {modalType === 3 && <Modal isOpen={isModalOpen} onClose={closeModal} showCloseIcon={true} header="Modal Header" content="Modal Body" modalWidth={400} position="bottom">
-                <div>
-                  <p class="text-gray-700 my-2">
-                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                  </p>
-                  <p class="text-gray-700 my-2">
-                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them
-                  </p>
-                </div>
-              </Modal>}
+                </Modal>
+              )}
             </div>
           }
         />
@@ -251,7 +325,9 @@ const CustomRoute = () => {
             <div className="flex">
               <Card>
                 <CardHeader>
-                  <h2 className="text-xl font-bold text-gray-800">Card Title</h2>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    Card Title
+                  </h2>
                 </CardHeader>
                 <CardBody>
                   <img
@@ -260,13 +336,15 @@ const CustomRoute = () => {
                     className="mb-4 rounded-lg"
                   />
                   <p className="text-gray-700 text-base">
-                    This is the content of the card body. It can contain text, images,
-                    or any other elements you want to display.
+                    This is the content of the card body. It can contain text,
+                    images, or any other elements you want to display.
                   </p>
                 </CardBody>
                 <CardFooter>
                   <div className="flex justify-between items-center">
-                    <div className="text-sm text-gray-500">Posted on January 1, 2024</div>
+                    <div className="text-sm text-gray-500">
+                      Posted on January 1, 2024
+                    </div>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                       Read More
                     </button>
@@ -325,28 +403,30 @@ const CustomRoute = () => {
             <div>
               <MenuBar
                 items={menuItems}
-                backgroundColor="blue"
+                color="blue"
                 textColor="white"
-                textSize="2xl"
-                navHeight="24"
+                textSize="22"
+                navHeight="150"
+                //logoImageURL="Logo"
                 logoImageURL="https://www.shutterstock.com/image-vector/creative-abstract-3d-sphere-logo-260nw-1971786323.jpg"
+                logoTextSize="80"
+                logoTextColor="yellow"
+                logoTextColorStrength="300"
+                logoClassName="font-semibold"
                 basePath="/menu"
-                imageHeight="16"
-                imageWidth= "20"
+                imageHeight="80"
+                imageWidth="80"
                 spaceNavItems="5"
-                itemsLinkHoverColor = "gray" 
-                itemsLinkHoverColorStrength = "800"
-                navItemPosition = "right"
-                logoPosition = "left"
+                itemsLinkHoverColor="gray"
+                itemsLinkHoverColorStrength="800"
+                navItemPosition="right"
+                logoPosition="left"
                 className="font-serif"
               />
             </div>
           }
         />
-        <Route
-        path="/presentation"
-        element={<Presentation/>}
-        />
+        <Route path="/presentation" element={<Presentation />} />
       </Routes>
     </>
   );
