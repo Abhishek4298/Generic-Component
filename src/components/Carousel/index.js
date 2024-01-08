@@ -1,4 +1,3 @@
-// Carousel.js
 import React, { useState, useEffect } from "react";
 // import { closeIcon } from "../../constant";
 
@@ -29,7 +28,9 @@ const Carousel = ({
       }, timeInterval * 1000); // Convert seconds to milliseconds
     }
 
-    return () => clearInterval(timer); // Clear the interval on component unmount
+    return () => clearInterval(timer); 
+    // Clear the interval on component unmount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, timeInterval]); // Recreate the timer if currentIndex or timeInterval changes
 
   return (
