@@ -1,7 +1,14 @@
 // Carousel.js
 import React, { useState, useEffect } from "react";
+// import { closeIcon } from "../../constant";
 
-const Carousel = ({ images, height, width, timeInterval }) => {
+const Carousel = ({
+  images,
+  height,
+  width,
+  timeInterval,
+  navigationDots = true,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goLeft = () => {
@@ -33,6 +40,7 @@ const Carousel = ({ images, height, width, timeInterval }) => {
           className="z-10 bg-gray-800 text-white p-2 rounded-full self-center"
           aria-label="Previous"
         >
+          {/* {closeIcon} */}
           &#9664;{/* Left Icon */}
         </button>
         <button
@@ -56,7 +64,7 @@ const Carousel = ({ images, height, width, timeInterval }) => {
           />
         ))}
       </div>
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 p-4">
+      {navigationDots && <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 p-4">
         {images.map((_, index) => (
           <button
             key={index}
@@ -64,16 +72,16 @@ const Carousel = ({ images, height, width, timeInterval }) => {
               index === currentIndex ? "bg-red-500" : ""
             }`}
             onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to slide ${index+1}`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
-      </div>
+      </div>}
     </div>
   );
 };
 
 export default Carousel;
 
-// TODO 
+// TODO
 // Pass the props that can modify left and right icon
-// pass the props for image to 
+// pass the props for image to
