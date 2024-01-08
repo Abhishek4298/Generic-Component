@@ -1,129 +1,151 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { tw } from "@twind/react";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("Name is required")
-    .min(3, "Name must be more than 3 characters")
-    .max(20, "It must not be more than 20"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .matches(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
-      "Password must be at least 8 characters, must contain at least one uppercase letter, must contain at least one lowercase letter, must contain at least one digit, must contain at least one special character"
-    )
-    .required("Password is required"),
-  phone: Yup.string()
-    .matches(/^[0-9]+$/, "Must be only digits")
-    .min(10, "Must be exactly 10 digits")
-    .max(10, "Must be exactly 10 digits")
-    .required("Phone number is required"),
-  message: Yup.string().required("Message is required"),
-  acceptTerms: Yup.array().of(Yup.string()).min(1, "You must accept the terms and conditions").required("You must accept the terms and conditions"),
-  radio: Yup.string().required("Please select one option"),
-  dropdown: Yup.string().required("Please select an option"),
-  hobbies: Yup.array()
-    .of(Yup.string())
-    .min(1, "At least one hobby must be checked")
-    .required("At least one hobby must be checked"),
-});
+const InputFormControllers = ({
+  fields,
+  validationSchema,
+  errorTextColor,
+  errorTextSize,
+  labelTextSize,
+  labelTextColor,
+  fieldClassName,
+  fieldTextSize,
+  fieldTextColor,
+  formWidth,
+  labelClassName,
+  labelTextColorStrength,
+  errorTextColorStrength,
+  radioSpacing,
+  checkboxRadioSize
+}) => {
+  const [submittedValues, setSubmittedValues] = useState(null);
 
-const InputFormControllers = ({ fields }) => {
   const initialValues = fields.reduce((acc, field) => {
     acc[field.name] = field.type === "checkbox" ? [] : "";
     return acc;
   }, {});
 
+  const formStyle = {
+    errorTextColor: tw`text-${errorTextColor}-${errorTextColorStrength}` || "text-red-500",
+    errorTextSize: tw`text-[${errorTextSize}px]` || "text-xl",
+    labelTextSize: tw`text-[${labelTextSize}px]` || "text-2xl",
+    labelTextColor: tw`text-${labelTextColor}-${labelTextColorStrength}` || "text-black",
+    fieldClassName: tw`${fieldClassName}` || "",
+    fieldTextColor: tw`text-${fieldTextColor}-600` || "text-black",
+    fieldTextSize: tw`text-[${fieldTextSize}px]` || "text-xl",
+    formWidth: tw`w-[${formWidth}px]` || "w-full",
+    labelClassName: tw`${labelClassName}` || "",
+    radioSpacing : tw`space-x-${radioSpacing}` || "space-x-5",
+    checkboxRadioSize : tw`scale-${checkboxRadioSize}` || "scale-105"
+  };
+
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values) => {
-        console.log(values);
-        alert(JSON.stringify(values, null, 2));
-      }}
-    >
-      <Form className="max-w-md mx-auto my-8">
-        {fields.map((field) => (
-          <div key={field.name} className="mb-4">
-            <label
-              htmlFor={field.name}
-              className="block text-sm font-medium text-gray-600"
-            >
-              {field.label}
-            </label>
-            {field.type === "textarea" ? (
-              <Field
-                as="textarea"
-                name={field.name}
-                placeholder={field.placeholder}
-                className="mt-1 p-2 block w-full border rounded-md"
-              />
-            ) : field.type === "checkbox" ? (
-              <div>
-                {field.options.map((option) => (
-                  <div key={option.value} className="flex items-center">
-                    <Field
-                      type="checkbox"
-                      name={field.name}
-                      value={option.value}
-                      className="mr-1"
-                    />
-                    <label className="text-sm">{option.label}</label>
-                  </div>
-                ))}
-              </div>
-            ) : field.type === "radio" ? (
-              <div className="flex space-x-2">
-                {field.options.map((option) => (
-                  <div key={option.value} className="flex items-center">
-                    <Field
-                      type="radio"
-                      name={field.name}
-                      value={option.value}
-                      className="mr-1"
-                    />
-                    <label className="text-sm">{option.label}</label>
-                  </div>
-                ))}
-              </div>
-            ) : field.type === "dropdown" ? (
-              <Field
-                as="select"
-                name={field.name}
-                className="mt-1 p-2 block w-full border rounded-md"
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          setSubmittedValues(values);
+        }}
+      >
+        <Form className={`${formStyle.formWidth} mx-auto my-8`}>
+          {fields.map((field) => (
+            <div key={field.name}>
+              <label
+                htmlFor={field.name}
+                className={`block ${formStyle.labelTextSize} ${formStyle.labelTextColor} ${formStyle.labelClassName}`}
               >
-                <option value="">Select...</option>
-                {field.options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Field>
-            ) : (
-              <Field
-                type={field.type}
-                name={field.name}
-                placeholder={field.placeholder}
-                className="mt-1 p-2 block w-full border rounded-md"
-              />
-            )}
-            <ErrorMessage
-              name={field.name}
-              component="div"
-              className="text-red-500 text-sm"
-            />
-          </div>
-        ))}
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-        >
-          Submit
-        </button>
-      </Form>
-    </Formik>
+                {field.label}
+              </label>
+              {field.type === "textarea" ? (
+                <Field
+                  as="textarea"
+                  className={`${formStyle.fieldClassName} block w-full border rounded-md 4 ${formStyle.fieldTextSize} ${formStyle.fieldTextColor}`}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                />
+              ) : field.type === "checkbox" ? (
+                <div>
+                  {field.options.map((option) => (
+                    <div key={option.value} className="flex items-center">
+                      <Field
+                        type="checkbox"
+                        name={field.name}
+                        value={option.value}
+                        className={`mr-1 ${formStyle.fieldClassName} ${formStyle.checkboxRadioSize}`}
+                      />
+                      <label
+                        className={`${formStyle.fieldTextSize} ${formStyle.fieldTextColor} ml-3`}
+                      >
+                        {option.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              ) : field.type === "radio" ? (
+                <div className={`flex ${formStyle.radioSpacing}`}>
+                  {field.options.map((option) => (
+                    <div key={option.value} className="flex items-center">
+                      <Field
+                        type="radio"
+                        name={field.name}
+                        value={option.value}
+                        className={`mr-1 ${formStyle.fieldClassName} ${formStyle.checkboxRadioSize}`}
+                      />
+                      <label
+                        className={`${formStyle.fieldTextSize} ${formStyle.fieldTextColor}`}
+                      >
+                        {option.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              ) : field.type === "dropdown" ? (
+                <Field
+                  as="select"
+                  name={field.name}
+                  className={`mt-1 ${formStyle.fieldClassName} block w-full border rounded-md ${formStyle.fieldTextSize} ${formStyle.fieldTextColor}`}
+                >
+                  <option value="">{field.placeholder}</option>
+                  {field.options.map((option) => (
+                    <option key={option.value} value={option.label}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Field>
+              ) : (
+                <Field
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  className={`mt-1 ${formStyle.fieldClassName} block w-full border rounded-md ${formStyle.fieldTextSize} ${formStyle.fieldTextColor}`}
+                />
+              )}
+              {field.validation && (
+                <ErrorMessage
+                  name={field.name}
+                  component="div"
+                  className={`${formStyle.errorTextColor} ${formStyle.errorTextSize} pt-2 pb-2`}
+                />
+              )}
+            </div>
+          ))}
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-xl mt-5 mb-10"
+          >
+            Submit
+          </button>
+        </Form>
+      </Formik>
+
+      {submittedValues && (
+        <div className="mt-10 flex justify-center items-center">
+          <pre>{JSON.stringify(submittedValues, null, 2)}</pre>
+        </div>
+      )}
+    </>
   );
 };
 
