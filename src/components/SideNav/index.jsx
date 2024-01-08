@@ -43,7 +43,7 @@ const SideNav = ({ navItem, isSideNavOpen = false }) => {
       <div className="fixed top-5 left-5 z-30">
         <div
           onClick={toggleNav}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="text-white font-bold py-2 px-4 rounded"
         >
           {isNavOpen ? (
             <h2 className="z-5 text-white">

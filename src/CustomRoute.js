@@ -55,45 +55,6 @@ const CustomRoute = () => {
     setDateRange(dates);
   };
 
-  const menuItems = [
-    {
-      label: "Home",
-      link: "/",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 italic">
-          <h1>This is Home component</h1>
-        </div>
-      ),
-    },
-    {
-      label: "About",
-      link: "/about",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 font-thin">
-          <h1>This is About component</h1>
-        </div>
-      ),
-    },
-    {
-      label: "Music",
-      link: "/music",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 font-semibold">
-          <h1>This is Music component</h1>
-        </div>
-      ),
-    },
-    {
-      label: "Contact",
-      link: "/contact",
-      linkedComponent: (
-        <div className="flex justify-center text-8xl text-red-600 mt-12 font-bold">
-          <h1>This is Contact component</h1>
-        </div>
-      ),
-    },
-  ];
-
   return (
     <>
       <Routes>
@@ -315,11 +276,11 @@ const CustomRoute = () => {
         <Route
           path="/card"
           element={
-            <div className="flex">
-              <Card>
+            <div className="flex mt-20">
+              <Card width={400}>
                 <CardHeader>
                   <h2 className="text-xl font-bold text-gray-800">
-                    Card Title
+                    Card Cat Title
                   </h2>
                 </CardHeader>
                 <CardBody>
@@ -344,12 +305,34 @@ const CustomRoute = () => {
                   </div>
                 </CardFooter>
               </Card>
-
-              <Card
-                title="Example Card"
-                content="This is a generic card component."
-                onClick={() => alert("Button clicked!")}
-              />
+              <Card width={400} hoverEffect={true} className="mx-14">
+                <CardHeader>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    Card Cat Title
+                  </h2>
+                </CardHeader>
+                <CardBody>
+                  <img
+                    src="https://placekitten.com/300/200"
+                    alt="Card Preview"
+                    className="mb-4 rounded-lg"
+                  />
+                  <p className="text-gray-700 text-base">
+                    This is the content of the card body. It can contain text,
+                    images, or any other elements you want to display.
+                  </p>
+                </CardBody>
+                <CardFooter>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-gray-500">
+                      Posted on January 1, 2024
+                    </div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Read More
+                    </button>
+                  </div>
+                </CardFooter>
+              </Card>
             </div>
           }
         />

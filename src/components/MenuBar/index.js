@@ -4,10 +4,10 @@ import { tw } from "@twind/react";
 
 const MenuBar = ({
   items,
-  color,
-  textColor,
-  textSize,
-  navHeight,
+  color="blue",
+  textColor="white",
+  textSize="22",
+  navHeight="100",
   logoImageURL,
   basePath,
   imageHeight,
