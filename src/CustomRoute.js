@@ -349,6 +349,7 @@ const CustomRoute = () => {
               showSorting={true}
               defaultPageSize={10}
               headerBgColor="gray"
+              headerBgColorStrength="600"
               defaultColumn={defaultColumn}
               showColumnFilter={true}
               filteredColumns={["first_name", "gender"]}
@@ -434,84 +435,84 @@ const CustomRoute = () => {
             <div className="flex justify-center">
               <ToastMessages
                 type="success"
-                buttonColor="bg-green-500"
-                buttonPosition="center"
-                autoClose={1000}
+                buttonColor="green"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="50"
+                onhoverBgColor="green"
+                onhoverBgColorStrength="700"
+                buttonTextSize="20"
+                buttonLabel="Submit Button"
+                autoClose={8000}
                 position="top-right"
                 hideProgressBar={false}
                 closeOnClick={false}
-                pauseOnHover={false}
+                pauseOnHover={true}
                 draggable={false}
-                progress={0.3}
                 theme="dark"
-                promiseFn={async () => {
-                  await new Promise((resolve) => setTimeout(resolve, 2000));
-                }}
-                loadingMessage="Loading..."
-                successMessage="Success Toast!"
+                message="Success Toast!"
                 errorMessage="Error!"
-                delaySuccess="1000"
               />
 
               <ToastMessages
-                type="error"
-                buttonColor="bg-red-500"
-                buttonPosition="end"
-                autoClose={5000}
-                position="top-right"
-                hideProgressBar={false}
-                closeOnClick={false}
-                pauseOnHover={false}
-                draggable={false}
-                progress={0.3}
-                theme="light"
-                promiseFn={async () => {
-                  await new Promise((resolve) => setTimeout(resolve, 2000));
-                }}
-                loadingMessage="Loading..."
-                successMessage="Error Toast!"
-                errorMessage="Error!"
-                delaySuccess="1000"
-              />
-              <ToastMessages
                 type="info"
-                buttonColor="bg-blue-500"
-                buttonPosition="start"
-                autoClose={5000}
+                buttonColor="blue"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="100"
+                onhoverBgColor="blue"
+                onhoverBgColorStrength="800"
+                buttonTextSize="20"
+                buttonLabel="Show Information"
+                autoClose={1500}
                 position="top-right"
                 hideProgressBar={false}
                 closeOnClick={false}
                 pauseOnHover={false}
                 draggable={false}
-                progress={0.3}
-                theme="dark"
-                promiseFn={async () => {
-                  await new Promise((resolve) => setTimeout(resolve, 2000));
-                }}
-                loadingMessage="Loading..."
-                successMessage="Information Toast!"
+                theme="light"
+                message="Info Toast!"
                 errorMessage="Error!"
-                delaySuccess="1000"
               />
               <ToastMessages
                 type="warning"
-                buttonColor="bg-yellow-500"
-                buttonPosition="center"
-                autoClose={5000}
+                buttonColor="yellow"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="100"
+                onhoverBgColor="yellow"
+                onhoverBgColorStrength="700"
+                buttonTextSize="20"
+                buttonLabel="Warning Message"
+                autoClose={1500}
                 position="top-right"
                 hideProgressBar={false}
                 closeOnClick={false}
                 pauseOnHover={false}
                 draggable={false}
-                progress={0.3}
-                theme="dark"
-                promiseFn={async () => {
-                  await new Promise((resolve) => setTimeout(resolve, 2000));
-                }}
-                loadingMessage="Loading..."
-                successMessage="Warning Toast!"
+                theme="light"
+                message="Warning Toast!"
                 errorMessage="Error!"
-                delaySuccess="1000"
+              />
+               <ToastMessages
+                type="error"
+                buttonColor="red"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="100"
+                onhoverBgColor="red"
+                onhoverBgColorStrength="600"
+                buttonTextSize="20"
+                buttonLabel="Error Message"
+                autoClose={1500}
+                position="bottom-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                theme="light"
+                message="Error Toast!"
+                errorMessage="Error!"
               />
             </div>
           }
