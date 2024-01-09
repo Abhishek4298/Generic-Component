@@ -18,6 +18,7 @@ import MenuBar from "./components/MenuBar";
 import Carousel from "./components/Carousel";
 import Presentation from "./components/MenuBar/Presentation";
 import { carouselImages } from "./constant";
+import RatingReview from "./components/RatingReview";
 
 const CustomRoute = () => {
   //Modal code start
@@ -511,6 +512,25 @@ const CustomRoute = () => {
                 errorMessage="Error!"
               />
             </div>
+          }
+        />
+        <Route
+          path="/rating-review"
+          element={
+            <RatingReview
+              allowReview={true}
+              ratingSize="40"
+              ratingColor="yellow"
+              ratingColorStrength ="500"
+              reviewSize="20"
+              reviewColor="blue"
+              reviewColorStrength="500"
+              reviewBorder="stone"
+              reviewBorderStrength = "800"
+              className=""
+              reviewMaxCharacter="100"
+              reviewPlaceholder = "Write your description"
+            />
           }
         />
       </Routes>
