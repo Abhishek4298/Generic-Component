@@ -8,11 +8,11 @@ import { menuItems, trueIcon } from "./constant";
 import CardBody from "./components/Card/CardBody";
 import CardHeader from "./components/Card/CardHeader";
 import CardFooter from "./components/Card/CardFooter";
-import Table from "./components/table";
-import Data from "./components/table/data.json";
-import COLUMNS from "./components/table/COLUMNS";
+import Table from "./components/Table";
+import Data from "./components/Table/data.json";
+import COLUMNS from "./components/Table/COLUMNS";
 import { useMemo } from "react";
-import ColumnFilter from "./components/table/ColumnFilter";
+import ColumnFilter from "./components/Table/ColumnFilter";
 import DatePickerComponent from "./components/DatePicker";
 import MenuBar from "./components/MenuBar";
 import Carousel from "./components/Carousel";
@@ -64,7 +64,7 @@ const CustomRoute = () => {
           element={
             <>
               <div className="flex justify-center items-center h-screen">
-                <div className="grid grid-cols-3 gap-8 p-8 bg-gray-100 rounded-lg shadow-md">
+                <div className="flex flex-wrap gap-8 p-8 bg-gray-100 rounded-lg shadow-md">
                   <div className="space-y-4">
                     <h1 class="text-2xl font-bold mb-4">Generic Button</h1>
                     <Button>Default Button</Button>
@@ -85,7 +85,7 @@ const CustomRoute = () => {
                       hoverColorStrength="100"
                       rounded="md"
                       textColor="red"
-                      size="lg"
+                      size="40"
                       onClick={handleClick}
                       className="italic mx-4"
                     >
@@ -131,11 +131,7 @@ const CustomRoute = () => {
                       Icon Button
                     </Button>
                   </div>
-                  <div className="flex flex-col space-y-4 mt-4">
-                    <Button size="small">Small</Button>
-                    <Button size="medium">Medium</Button>
-                    <Button size="large">Large</Button>
-                  </div>
+                
                 </div>
               </div>
             </>
@@ -462,7 +458,7 @@ const CustomRoute = () => {
                 buttonTextColorStrength="100"
                 onhoverBgColor="blue"
                 onhoverBgColorStrength="800"
-                buttonTextSize="20"
+                buttonTextSize="22"
                 buttonLabel="Show Information"
                 autoClose={1500}
                 position="top-right"

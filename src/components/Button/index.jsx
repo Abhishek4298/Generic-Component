@@ -47,12 +47,14 @@ const Button = ({
   const roundedClasses = rounded ? tw`rounded-${rounded}` : "rounded";
 
   // Size
-  let sizeClass = "text-md";
-  if (size === "small") {
-    sizeClass = "text-sm p-2"; // Adjust padding for small size
-  } else if (size === "large") {
-    sizeClass = "text-lg p-4"; // Adjust padding for large size
-  }
+  // let sizeClass = "text-md";
+  // if (size === "small") {
+  //   sizeClass = "text-sm p-2"; // Adjust padding for small size
+  // } else if (size === "large") {
+  //   sizeClass = "text-lg p-4"; // Adjust padding for large size
+  // }
+
+  let sizeClass = tw`text-[${size}px]`
 
   // Combine all classes
   const classes = `${baseClasses} ${colorClasses} ${textColorClass} ${borderColorClass} ${roundedClasses} ${sizeClass} ${className}`;

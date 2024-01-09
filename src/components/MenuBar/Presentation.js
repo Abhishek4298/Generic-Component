@@ -7,10 +7,10 @@ import CardBody from "../Card/CardBody";
 import { carouselImages, trueIcon } from "../../constant";
 import Button from "../Button";
 import Modal from "../Modal";
-import COLUMNS from "../table/COLUMNS";
-import Data from "../table/data.json";
-import Table from "../table";
-import ColumnFilter from "../table/ColumnFilter";
+import COLUMNS from "../Table/COLUMNS";
+import Data from "../Table/data.json";
+import Table from "../Table";
+import ColumnFilter from "../Table/ColumnFilter";
 import DatePickerComponent from "../DatePicker";
 import Carousel from "../Carousel";
 
