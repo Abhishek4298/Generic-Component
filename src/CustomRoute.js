@@ -18,6 +18,7 @@ import MenuBar from "./components/MenuBar";
 import Carousel from "./components/Carousel";
 import Presentation from "./components/MenuBar/Presentation";
 import { carouselImages } from "./constant";
+import Tooltip from "./components/Tooltip";
 
 const CustomRoute = () => {
   //Modal code start
@@ -131,7 +132,6 @@ const CustomRoute = () => {
                       Icon Button
                     </Button>
                   </div>
-                
                 </div>
               </div>
             </>
@@ -490,7 +490,7 @@ const CustomRoute = () => {
                 message="Warning Toast!"
                 errorMessage="Error!"
               />
-               <ToastMessages
+              <ToastMessages
                 type="error"
                 buttonColor="red"
                 buttonColorStrength="500"
@@ -510,6 +510,33 @@ const CustomRoute = () => {
                 message="Error Toast!"
                 errorMessage="Error!"
               />
+            </div>
+          }
+        />
+        <Route
+          path="/tooltip"
+          element={
+            <div className="flex justify-center items-center h-screen">
+              <Tooltip content="Top Tooltip" position="top" mode="light">
+                <button className="bg-blue-500 p-3 m-3 rounded-lg">
+                  Tooltip Top
+                </button>
+              </Tooltip>
+              <Tooltip content="Right Tooltip" position="right" mode="dark">
+                <button className="bg-blue-500 p-3 m-3 rounded-lg">
+                  Tooltip Right
+                </button>
+              </Tooltip>
+              <Tooltip content="Bottom Tooltip" position="bottom" mode="light">
+                <button className="bg-blue-500 p-3 m-3 rounded-lg">
+                  Tooltip Bottom
+                </button>
+              </Tooltip>
+              <Tooltip content="Left Tooltip" position="left" mode="dark">
+                <button className="bg-blue-500 p-3 m-3 rounded-lg">
+                  Tooltip Left
+                </button>
+              </Tooltip>
             </div>
           }
         />
