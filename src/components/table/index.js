@@ -20,6 +20,7 @@ const Table = ({
   showSorting,
   defaultPageSize,
   headerBgColor,
+  headerBgColorStrength,
   defaultColumn,
   showColumnFilter,
   filteredColumns,
@@ -88,7 +89,7 @@ const Table = ({
   });
 
   const headerBackgroundColor =
-    headerBgColor?.length > 0 ? tw`bg-${headerBgColor}-500` : "bg-slate-800";
+    headerBgColor?.length > 0 ? tw`bg-${headerBgColor}-${headerBgColorStrength}` : "bg-slate-800";
 
   return (
     <div className={`${showFilters ? "pt-5" : "pt-20"}  m-2`}>

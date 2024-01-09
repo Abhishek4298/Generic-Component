@@ -3,15 +3,16 @@ import { useState } from "react";
 import Modal from "./components/Modal";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import ToastMessages from "./components/ToastMessages";
 import { menuItems, trueIcon } from "./constant";
 import CardBody from "./components/Card/CardBody";
 import CardHeader from "./components/Card/CardHeader";
 import CardFooter from "./components/Card/CardFooter";
-import Table from "./components/table";
-import Data from "./components/table/data.json";
-import COLUMNS from "./components/table/COLUMNS";
+import Table from "./components/Table";
+import Data from "./components/Table/data.json";
+import COLUMNS from "./components/Table/COLUMNS";
 import { useMemo } from "react";
-import ColumnFilter from "./components/table/ColumnFilter";
+import ColumnFilter from "./components/Table/ColumnFilter";
 import DatePickerComponent from "./components/DatePicker";
 import MenuBar from "./components/MenuBar";
 import Carousel from "./components/Carousel";
@@ -63,7 +64,7 @@ const CustomRoute = () => {
           element={
             <>
               <div className="flex justify-center items-center h-screen">
-                <div className="grid grid-cols-3 gap-8 p-8 bg-gray-100 rounded-lg shadow-md">
+                <div className="flex flex-wrap gap-8 p-8 bg-gray-100 rounded-lg shadow-md">
                   <div className="space-y-4">
                     <h1 class="text-2xl font-bold mb-4">Generic Button</h1>
                     <Button>Default Button</Button>
@@ -84,7 +85,7 @@ const CustomRoute = () => {
                       hoverColorStrength="100"
                       rounded="md"
                       textColor="red"
-                      size="lg"
+                      size="40"
                       onClick={handleClick}
                       className="italic mx-4"
                     >
@@ -130,11 +131,7 @@ const CustomRoute = () => {
                       Icon Button
                     </Button>
                   </div>
-                  <div className="flex flex-col space-y-4 mt-4">
-                    <Button size="small">Small</Button>
-                    <Button size="medium">Medium</Button>
-                    <Button size="large">Large</Button>
-                  </div>
+                
                 </div>
               </div>
             </>
@@ -348,6 +345,7 @@ const CustomRoute = () => {
               showSorting={true}
               defaultPageSize={10}
               headerBgColor="gray"
+              headerBgColorStrength="600"
               defaultColumn={defaultColumn}
               showColumnFilter={true}
               filteredColumns={["first_name", "gender"]}
@@ -423,6 +421,94 @@ const CustomRoute = () => {
                 height={400}
                 width="100%"
                 navigationDots={false}
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/toast"
+          element={
+            <div className="flex justify-center">
+              <ToastMessages
+                type="success"
+                buttonColor="green"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="50"
+                onhoverBgColor="green"
+                onhoverBgColorStrength="700"
+                buttonTextSize="20"
+                buttonLabel="Submit Button"
+                autoClose={8000}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={true}
+                draggable={false}
+                theme="dark"
+                message="Success Toast!"
+                errorMessage="Error!"
+              />
+
+              <ToastMessages
+                type="info"
+                buttonColor="blue"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="100"
+                onhoverBgColor="blue"
+                onhoverBgColorStrength="800"
+                buttonTextSize="22"
+                buttonLabel="Show Information"
+                autoClose={1500}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                theme="light"
+                message="Info Toast!"
+                errorMessage="Error!"
+              />
+              <ToastMessages
+                type="warning"
+                buttonColor="yellow"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="100"
+                onhoverBgColor="yellow"
+                onhoverBgColorStrength="700"
+                buttonTextSize="20"
+                buttonLabel="Warning Message"
+                autoClose={1500}
+                position="top-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                theme="light"
+                message="Warning Toast!"
+                errorMessage="Error!"
+              />
+               <ToastMessages
+                type="error"
+                buttonColor="red"
+                buttonColorStrength="500"
+                buttonTextColor="gray"
+                buttonTextColorStrength="100"
+                onhoverBgColor="red"
+                onhoverBgColorStrength="600"
+                buttonTextSize="20"
+                buttonLabel="Error Message"
+                autoClose={1500}
+                position="bottom-right"
+                hideProgressBar={false}
+                closeOnClick={false}
+                pauseOnHover={false}
+                draggable={false}
+                theme="light"
+                message="Error Toast!"
+                errorMessage="Error!"
               />
             </div>
           }

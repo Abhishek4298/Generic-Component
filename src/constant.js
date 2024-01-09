@@ -50,6 +50,7 @@ export const sampleImage1 =
     { label: "Date Picker", link: "/datepicker" },
     { label: "Menu Bar", link: "/menu" },
     { label: "Carousel", link: "/carousel" },
+    { label: "Toast Message", link: "/toast" },
   ];
 
  export const menuItems = [
