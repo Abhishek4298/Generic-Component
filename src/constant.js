@@ -1,3 +1,7 @@
+import country from "./components/FormInput/country.json";
+import graduation from "./components/FormInput/graduation.json";
+import state from "./components/FormInput/state.json";
+
 export const trueIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -90,5 +94,138 @@ export const sampleImage1 =
           <h1>This is Contact component</h1>
         </div>
       ),
+    },
+  ];
+
+  export const fields = [
+    {
+      name: "first_name",
+      label: "First Name",
+      type: "text",
+      placeholder: "Enter your First Name",
+      validation: true,
+      firstNameValidation: {
+        minLength: 3,
+        maxLength: 20,
+      },
+    },
+    {
+      name: "last_name",
+      label: "Last Name",
+      type: "text",
+      placeholder: "Enter your Last Name",
+      validation: true,
+    },
+    {
+      name: "email",
+      label: "Email",
+      type: "email",
+      placeholder: "Enter your email",
+      validation: true,
+    },
+    {
+      name: "password",
+      label: "Password",
+      type: "password",
+      placeholder: "Enter your password",
+      validation: true,
+      passwordValidation: {
+        minimumLength: 8,
+        pattern:
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
+        message:
+          "Password must contain at least one uppercase letter, must contain at least one lowercase letter, must contain at least one digit, must contain at least one special character",
+      },
+    },
+    {
+      name: "phone",
+      label: "Phone",
+      type: "text",
+      placeholder: "Enter your phone number",
+      validation: true,
+    },
+    {
+      name: "hobbies",
+      label: "Hobbies",
+      type: "checkbox",
+      options: [
+        { value: "reading", label: "Reading" },
+        { value: "traveling", label: "Traveling" },
+        { value: "coding", label: "Coding" },
+      ],
+      validation: true,
+    },
+    {
+      name: "highestdegree",
+      label: "Highest Degree",
+      type: "dropdown",
+      placeholder: "Select Your Highest Degree",
+      options: graduation.map(({ value, label }) => ({
+        value: value,
+        label: label,
+      })),
+      validation: true,
+    },
+    {
+      name: "radio",
+      label: "Gender",
+      type: "radio",
+      placeholder: "Select Gender",
+      options: [
+        { value: "male", label: "Male" },
+        { value: "female", label: "Female" },
+        { value: "others", label: "Others" },
+      ],
+      validation: true,
+    },
+    {
+      name: "country",
+      label: "Country",
+      type: "dropdown",
+      placeholder: "Select Country",
+      options: country.map(({ code, name }) => ({
+        value: code,
+        label: name,
+      })),
+      validation: true,
+    },
+    {
+      name: "state",
+      label: "State",
+      type: "dropdown",
+      placeholder: "Select State",
+      options: state.map(({ code, name }) => ({
+        value: code,
+        label: name,
+      })),
+      validation: true,
+    },
+    {
+      name: "city",
+      label: "City",
+      type: "dropdown",
+      placeholder: "Select City",
+      options: [
+        { value: "ranchi", label: "Ranchi" },
+        { value: "jamshedpur", label: "Jamshedpur" },
+        { value: "varanasi", label: "Varanasi" },
+      ],
+      validation: true,
+    },
+    {
+      name: "message",
+      label: "Message",
+      type: "textarea",
+      placeholder: "Enter your message",
+      validation: false,
+    },
+    {
+      name: "acceptTerms",
+      label: "Accept Terms & Conditions",
+      type: "checkbox",
+      options: [
+        { value: "acceptTerms", label: "I accept the terms and conditions" },
+      ],
+      validation: true,
     },
   ];
