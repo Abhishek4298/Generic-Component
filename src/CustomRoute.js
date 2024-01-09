@@ -25,6 +25,11 @@ const CustomRoute = () => {
       type: "text",
       placeholder: "Enter your First Name",
       validation: true,
+      firstNameValidation: {
+        minLength: 3,
+        maxLength: 20,
+      },
+
     },
     {
       name: "last_name",
@@ -46,6 +51,11 @@ const CustomRoute = () => {
       type: "password",
       placeholder: "Enter your password",
       validation: true,
+      passwordValidation: {
+        minimumLength: 8, 
+        pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
+        message: "Password must contain at least one uppercase letter, must contain at least one lowercase letter, must contain at least one digit, must contain at least one special character",
+      },
     },
     {
       name: "phone",
@@ -146,46 +156,54 @@ const CustomRoute = () => {
     fields.forEach((field) => {
       if (field.validation) {
         switch (field.type) {
-          case "text":
+
+            case "text":
+            const {minLength, maxLength} = field.firstNameValidation || {};
             schema[field.name] = Yup.string()
               .required(`${field.label} is required`)
-              .min(3, `${field.label} must be more than 3 characters`)
-              .max(20, `${field.label} must not be more than 20 characters`);
+              .min(minLength !== undefined ? minLength : 0, `${field.label} must be more than ${minLength || 0} characters`)
+              .max(maxLength !== undefined ? maxLength : Infinity, `${field.label} must not be more than ${maxLength || 'Infinity'} characters`);
             break;
-          case "password":
-            schema[field.name] = Yup.string()
-              .matches(
-                /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
-                `${field.label} must be at least 8 characters, must contain at least one uppercase letter, must contain at least one lowercase letter, must contain at least one digit, must contain at least one special character`
-              )
-              .required(`${field.label} is required`);
-            break;
+         
+            case "password":
+              const { minimumLength, pattern, message } = field.passwordValidation || {};
+              schema[field.name] = Yup.string()
+                .required(`${field.label} is required`)
+                .min(minimumLength, `${field.label} must be at least ${minimumLength} characters`)
+                .matches(pattern, { message });
+              break;
+
           case "textarea":
             schema[field.name] = Yup.string().required(
               `${field.label} is required`
             );
             break;
+
           case "email":
             schema[field.name] = Yup.string()
               .email("Invalid email")
               .required(`${field.label} is required`);
             break;
+
           case "radio":
             schema[field.name] = Yup.string().required(
               "Please select one option"
             );
             break;
+
           case "dropdown":
             schema[field.name] = Yup.string().required(
               `${field.label} is required`
             );
             break;
+
           case "checkbox":
             schema[field.name] = Yup.array()
               .of(Yup.string())
               .min(1, `${field.label} must be checked`)
               .required(`${field.label} is required`);
             break;
+
           default:
             break;
         }
