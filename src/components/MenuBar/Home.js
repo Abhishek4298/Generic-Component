@@ -7,10 +7,10 @@ import CardBody from "../Card/CardBody";
 import { trueIcon } from "../../constant";
 import Button from "../Button";
 import Modal from "../Modal";
-import COLUMNS from "../table/COLUMNS";
-import Data from "../table/data.json";
-import Table from "../table";
-import ColumnFilter from "../table/ColumnFilter";
+import COLUMNS from "../Table/COLUMNS";
+import Data from "../Table/data.json";
+import Table from "../Table";
+import ColumnFilter from "../Table/ColumnFilter";
 import DatePickerComponent from "../DatePicker";
 
 const Home = () => {
@@ -269,19 +269,19 @@ const Home = () => {
                   position="center"
                 >
                   <div>
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                      <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-black">
                         Terms of Service
                       </h3>
                     </div>
-                    <div class="p-4 md:p-5 space-y-4">
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    <div className="p-4 md:p-5 space-y-4">
+                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                         With less than a month to go before the European Union
                         enacts new consumer privacy laws for its citizens,
                         companies around the world are updating their terms of
                         service agreements to comply.
                       </p>
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                         The European Union’s General Data Protection Regulation
                         (G.D.P.R.) goes into effect on May 25 and is meant to
                         ensure a common set of data rights in the European
@@ -290,18 +290,18 @@ const Home = () => {
                         personally affect them.
                       </p>
                     </div>
-                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                       <button
                         data-modal-hide="default-modal"
                         type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         I accept
                       </button>
                       <button
                         data-modal-hide="default-modal"
                         type="button"
-                        class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                       >
                         Decline
                       </button>
@@ -320,13 +320,13 @@ const Home = () => {
                   position="top"
                 >
                   <div>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       With less than a month to go before the European Union
                       enacts new consumer privacy laws for its citizens,
                       companies around the world are updating their terms of
                       service agreements to comply.
                     </p>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       The European Union’s General Data Protection Regulation
                       (G.D.P.R.) goes into effect on May 25 and is meant to
                       ensure a common set of data rights in the European Union.
@@ -348,13 +348,13 @@ const Home = () => {
                   position="bottom"
                 >
                   <div>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       With less than a month to go before the European Union
                       enacts new consumer privacy laws for its citizens,
                       companies around the world are updating their terms of
                       service agreements to comply.
                     </p>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       The European Union’s General Data Protection Regulation
                       (G.D.P.R.) goes into effect on May 25 and is meant to
                       ensure a common set of data rights in the European Union.

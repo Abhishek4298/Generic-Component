@@ -51,6 +51,7 @@ export const sampleImage1 =
     { label: "Menu Bar", link: "/menu" },
     { label: "Carousel", link: "/carousel" },
     { label: "Toast Message", link: "/toast" },
+    { label: "File Upload", link: "/fileupload" },
   ];
 
  export const menuItems = [

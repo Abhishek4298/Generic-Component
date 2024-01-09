@@ -16,8 +16,9 @@ import ColumnFilter from "./components/Table/ColumnFilter";
 import DatePickerComponent from "./components/DatePicker";
 import MenuBar from "./components/MenuBar";
 import Carousel from "./components/Carousel";
-import Presentation from "./components/MenuBar/Presentation";
 import { carouselImages } from "./constant";
+import Presentation from "./components/MenuBar/Presentation";
+import FileUpload from "./components/FileUpload";
 
 const CustomRoute = () => {
   //Modal code start
@@ -56,6 +57,12 @@ const CustomRoute = () => {
     setDateRange(dates);
   };
 
+  const handleUpload = (files) => {
+    // Replace this with your upload logic to AWS S3, Azure, etc.
+    console.log('Files to upload:', files);
+  };
+  
+
   return (
     <>
       <Routes>
@@ -66,7 +73,7 @@ const CustomRoute = () => {
               <div className="flex justify-center items-center h-screen">
                 <div className="flex flex-wrap gap-8 p-8 bg-gray-100 rounded-lg shadow-md">
                   <div className="space-y-4">
-                    <h1 class="text-2xl font-bold mb-4">Generic Button</h1>
+                    <h1 className="text-2xl font-bold mb-4">Generic Button</h1>
                     <Button>Default Button</Button>
                     <Button
                       borderColor="blue"
@@ -131,7 +138,6 @@ const CustomRoute = () => {
                       Icon Button
                     </Button>
                   </div>
-                
                 </div>
               </div>
             </>
@@ -170,19 +176,19 @@ const CustomRoute = () => {
                   position="center"
                 >
                   <div>
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                      <h3 class="text-xl font-semibold text-gray-900 dark:text-black">
+                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-black">
                         Terms of Service
                       </h3>
                     </div>
-                    <div class="p-4 md:p-5 space-y-4">
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    <div className="p-4 md:p-5 space-y-4">
+                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                         With less than a month to go before the European Union
                         enacts new consumer privacy laws for its citizens,
                         companies around the world are updating their terms of
                         service agreements to comply.
                       </p>
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                         The European Union’s General Data Protection Regulation
                         (G.D.P.R.) goes into effect on May 25 and is meant to
                         ensure a common set of data rights in the European
@@ -191,18 +197,18 @@ const CustomRoute = () => {
                         personally affect them.
                       </p>
                     </div>
-                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                       <button
                         data-modal-hide="default-modal"
                         type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         I accept
                       </button>
                       <button
                         data-modal-hide="default-modal"
                         type="button"
-                        class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        className="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                       >
                         Decline
                       </button>
@@ -221,13 +227,13 @@ const CustomRoute = () => {
                   position="top"
                 >
                   <div>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       With less than a month to go before the European Union
                       enacts new consumer privacy laws for its citizens,
                       companies around the world are updating their terms of
                       service agreements to comply.
                     </p>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       The European Union’s General Data Protection Regulation
                       (G.D.P.R.) goes into effect on May 25 and is meant to
                       ensure a common set of data rights in the European Union.
@@ -249,13 +255,13 @@ const CustomRoute = () => {
                   position="bottom"
                 >
                   <div>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       With less than a month to go before the European Union
                       enacts new consumer privacy laws for its citizens,
                       companies around the world are updating their terms of
                       service agreements to comply.
                     </p>
-                    <p class="text-gray-700 my-2">
+                    <p className="text-gray-700 my-2">
                       The European Union’s General Data Protection Regulation
                       (G.D.P.R.) goes into effect on May 25 and is meant to
                       ensure a common set of data rights in the European Union.
@@ -490,7 +496,7 @@ const CustomRoute = () => {
                 message="Warning Toast!"
                 errorMessage="Error!"
               />
-               <ToastMessages
+              <ToastMessages
                 type="error"
                 buttonColor="red"
                 buttonColorStrength="500"
@@ -510,6 +516,23 @@ const CustomRoute = () => {
                 message="Error Toast!"
                 errorMessage="Error!"
               />
+            </div>
+          }
+        />
+        <Route
+          path="/fileupload"
+          element={
+            <div className="container mx-auto my-8">
+              <h1 className="text-3xl font-semibold mb-4">
+                File Upload Example
+              </h1>
+              <FileUpload
+        accept="image/*"
+        multiple={true}
+        onUpload={handleUpload}
+      />
+
+              {/* Your other UI components */}
             </div>
           }
         />
